@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.benson.mall.redbaby.vo.Product;
 import com.benson.mall.redbaby.vo.ProductListVo;
+import com.benson.virus.R;
 
 public class MyFavoriteAdapter extends ImageAsyncLoaderAdpter<Product> {
 

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.benson.mall.redbaby.OrderListActivity;
 import com.benson.mall.redbaby.vo.OrderList;
+import com.benson.virus.R;
 
 public class OrderListLvAdapter extends BaseAdapter{
 	private static final String TAG = "OrderListLvAdapter";

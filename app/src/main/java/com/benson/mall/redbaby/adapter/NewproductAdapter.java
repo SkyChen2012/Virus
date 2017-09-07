@@ -17,6 +17,7 @@ import com.benson.mall.redbaby.util.ImageUtil.ImageCallback;
 import com.benson.mall.redbaby.util.Logger;
 import com.benson.mall.redbaby.vo.Limitbuy;
 import com.benson.mall.redbaby.vo.ProductListVo;
+import com.benson.virus.R;
 
 public class NewproductAdapter extends ArrayWapperAdapter<ProductListVo> {
 	private List<ProductListVo> list;

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.benson.mall.redbaby.vo.Limitbuy;
+import com.benson.virus.R;
 
 public class LimitbuyAdapter extends ImageAsyncLoaderAdpter<Limitbuy> {
 	private static final String TAG = "LimitbuyAdapter";

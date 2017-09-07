@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.benson.mall.redbaby.util.ImageUtil;
 import com.benson.mall.redbaby.util.ImageUtil.ImageCallback;
 import com.benson.mall.redbaby.vo.Product;
+import com.benson.virus.R;
 
 public class SearchResultAdapter extends BaseAdapter {
 	private Context context;

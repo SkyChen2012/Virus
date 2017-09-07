@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 
 import com.benson.mall.redbaby.vo.BulletinVo;
+import com.benson.virus.R;
 
 public class BulletinLvAdapter extends ImageAsyncLoaderAdpter<BulletinVo> {
 

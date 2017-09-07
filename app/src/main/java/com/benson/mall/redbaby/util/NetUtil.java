@@ -26,6 +26,7 @@ import android.net.NetworkInfo;
 import android.widget.Toast;
 
 import com.benson.mall.redbaby.vo.RequestVo;
+import com.benson.virus.R;
 
 /**
  * com.benson.mall.redbaby.util

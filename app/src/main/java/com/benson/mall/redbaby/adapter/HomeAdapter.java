@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.benson.mall.redbaby.vo.HomeCategory;
+import com.benson.virus.R;
 
 /**
  * 首页栏目Adapter

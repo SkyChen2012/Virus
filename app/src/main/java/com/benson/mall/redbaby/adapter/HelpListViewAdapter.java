@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.benson.mall.redbaby.vo.HelpVo;
+import com.benson.virus.R;
 
 import android.content.Context;
 import android.view.View;

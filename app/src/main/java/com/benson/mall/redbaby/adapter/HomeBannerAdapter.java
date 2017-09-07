@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import com.benson.mall.redbaby.engine.SyncImageLoader;
 import com.benson.mall.redbaby.engine.SyncImageLoader.OnImageLoadListener;
 import com.benson.mall.redbaby.vo.HomeBanner;
+import com.benson.virus.R;
+
 /**
  * 首页BannerAdapter 
  * @author liu

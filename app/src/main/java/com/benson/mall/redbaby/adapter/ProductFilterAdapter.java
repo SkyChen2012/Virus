@@ -2,6 +2,8 @@ package com.benson.mall.redbaby.adapter;
 
 import java.util.List;
 import com.benson.mall.redbaby.vo.FilterCategory;
+import com.benson.virus.R;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;

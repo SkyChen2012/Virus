@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.benson.virus.R;
+
 public class SearchAdapter extends BaseAdapter {
 	private Context context;
 	private String[] search;

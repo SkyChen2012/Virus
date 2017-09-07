@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.benson.mall.redbaby.dao.AreaDao;
 import com.benson.mall.redbaby.vo.AddressDetail;
 import com.benson.mall.redbaby.vo.Area;
+import com.benson.virus.R;
 
 /**
  * 选择地址

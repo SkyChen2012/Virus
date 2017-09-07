@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.benson.mall.redbaby.adapter.ProductAdapter.ProductViewHolder;
 import com.benson.mall.redbaby.vo.CartProduct;
 import com.benson.mall.redbaby.vo.ProductListVo;
+import com.benson.virus.R;
 
 public class PaymentCentUpdateAdapter extends ImageAsyncLoaderAdpter<CartProduct> {
 	private static final String TAG = "PaymentCentUpdateAdapter";

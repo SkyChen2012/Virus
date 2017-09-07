@@ -5,6 +5,7 @@ import java.util.List;
 import com.benson.mall.redbaby.util.ImageUtil;
 import com.benson.mall.redbaby.util.ImageUtil.ImageCallback;
 import com.benson.mall.redbaby.vo.ProductDetail;
+import com.benson.virus.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;

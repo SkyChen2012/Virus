@@ -26,6 +26,7 @@ import com.benson.mall.redbaby.util.ImageUtil;
 import com.benson.mall.redbaby.util.ImageUtil.ImageCallback;
 import com.benson.mall.redbaby.util.Logger;
 import com.benson.mall.redbaby.vo.BrandCategory;
+import com.benson.virus.R;
 
 public class BrandAdapter extends BaseExpandableListAdapter{
 	
