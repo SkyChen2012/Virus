@@ -114,7 +114,7 @@ public class CategoryActivity extends BaseWapperActivity {
 					}
 					
 				}else{
-					Toast.makeText(getApplicationContext(), "数值没有传递成功", 0).show();
+					Toast.makeText(getApplicationContext(), "数值没有传递成功", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});

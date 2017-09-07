@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.benson.game.AgileBuddy.Splash;
+import com.benson.mall.redbaby.WelcomeActivity;
 import com.benson.virus.JPush.JPushUtil;
 
 
@@ -119,6 +120,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(MainActivity.this, WelcomeActivity.class);
+            startActivity(intent);
 
         }
 
