@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.benson.virus"
+    android:versionCode="2"
+    android:versionName="1.0.2">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:name=".virusApplication">
+
+        <!--启动界面-->
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+
+        <!--game -->
+        <!--AgileBuddy-->
+        <activity
+            android:name="com.benson.game.AgileBuddy.Splash"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.benson.game.AgileBuddy.AgileBuddyActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.benson.game.AgileBuddy.Prefs"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
+            android:name="com.benson.game.AgileBuddy.GlobalRankingActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/global_ranking"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.benson.game.AgileBuddy.TipsActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <service android:name="com.benson.game.AgileBuddy.ScoreUpgrateService" />
+        <!--AgileBuddy end-->
+
+        <!--game end-->
+
+        <!--mall-->
+         <!--欢迎界面-->
+        <activity
+            android:name="com.benson.mall.redbaby.WelcomeActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+        </activity>
+
+        <!-- 主页 -->
+        <activity
+            android:name="com.benson.mall.redbaby.HomeActivity"
+            android:launchMode="singleTask" />
+
+        <!-- 分类 -->
+        <!--<activity-->
+            <!--android:name="com.benson.mall.redbaby.CategoryActivity"-->
+            <!--android:launchMode="singleTask" />-->
+
+        <activity android:name="com.benson.mall.redbaby.CategoryActivity"
+            />
+        <!-- 搜索 -->
+        <activity
+            android:name="com.benson.mall.redbaby.SearchActivity"
+            android:launchMode="singleTask" />
+
+        <!-- 购物车 -->
+        <activity
+            android:name="com.benson.mall.redbaby.ShoppingCarActivity"
+            android:launchMode="singleTask" />
+
+        <!-- 更多 -->
+        <activity
+            android:name="com.benson.mall.redbaby.MoreActivity"
+            android:launchMode="singleTask" />
+
+        <!-- 分类 -->
+        <activity android:name="com.benson.mall.redbaby.CategoryActivity" />
+        <activity android:name="com.benson.mall.redbaby.CategoryTwoLevelActivity" />
+        <activity android:name="com.benson.mall.redbaby.CategoryThreeLevelActivity" />
+
+        <activity android:name="com.benson.mall.redbaby.ProductListActivity"/>
+        <activity android:name="com.benson.mall.redbaby.ProductFilterActivity"/>
+
+        <!-- 商品详细 -->
+        <activity  android:name="com.benson.mall.redbaby.ProductDetailActivity"/>
+
+        <!-- 地址管理 -->
+        <activity android:name="com.benson.mall.redbaby.AddressManageActivity" />
+
+        <!-- 地址添加 -->
+        <activity android:name="com.benson.mall.redbaby.AddAddressActivity" />
+
+        <!-- 选择地址 -->
+        <activity android:name="com.benson.mall.redbaby.SelectAddressActivity" />
+
+        <!-- 浏览记录 -->
+        <activity android:name="com.benson.mall.redbaby.ProductHistoryActivity" />
+
+        <!-- 登录 -->
+        <activity android:name="com.benson.mall.redbaby.LoginActivity" />
+
+        <!-- 注册 -->
+        <activity android:name="com.benson.mall.redbaby.RegisterActivity" />
+
+        <!-- 促销快报 -->
+        <activity android:name="com.benson.mall.redbaby.BulletinActivity" />
+
+        <!-- 促销列表 -->
+        <activity android:name="com.benson.mall.redbaby.TopicProductListActivity" />
+
+        <!-- 关于 -->
+        <activity android:name="com.benson.mall.redbaby.AboutActivity" />
+        <!-- 帮助 -->
+        <activity android:name="com.benson.mall.redbaby.HelpActivity" />
+        <!-- 帮助详情 -->
+        <activity android:name="com.benson.mall.redbaby.HelpDetailActivity" />
+
+        <!-- 搜索列表-->
+        <activity android:name="com.benson.mall.redbaby.SearchProductListActivity" />
+
+        <!-- 服务 -->
+        <service  android:name="com.benson.mall.redbaby.service.ECServiceManager"></service>
+        <!-- 限时抢购 -->
+        <activity android:name="com.benson.mall.redbaby.LimitbuyActivity" />
+        <activity android:name="com.benson.mall.redbaby.NewproductActivity" />
+        <activity android:name="com.benson.mall.redbaby.HotproductActivity" />
+        <activity android:name="com.benson.mall.redbaby.BrandActivity" />
+        <activity android:name="com.benson.mall.redbaby.PlistproductActivity" />
+        <!-- 账户中心  ADD BY  LQT -->
+        <activity android:name="com.benson.mall.redbaby.AccountActivity"></activity>
+        <activity android:name="com.benson.mall.redbaby.OrderListActivity"></activity>
+        <activity android:name="com.benson.mall.redbaby.AddressManageActivity"></activity>
+        <activity android:name="com.benson.mall.redbaby.MyFavoriteActivity"></activity>
+        <activity android:name="com.benson.mall.redbaby.OrderDetailActivity"></activity>
+        <activity android:name="com.benson.mall.redbaby.Payment_Center_Activity"></activity>
+        <activity android:name="com.benson.mall.redbaby.OrdrSubmitOkActivity"></activity>
+        <!--mall end-->
+        <!-- User defined.  For test only  用户自定义的广播接收器-->
+        <receiver
+            android:name=".JPush.JPushReceiver"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" /> <!--Required  用户注册SDK的intent-->
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" /> <!--Required  用户接收SDK消息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" /> <!--Required  用户接收SDK通知栏信息的intent-->
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" /> <!--Required  用户打开自定义通知栏的intent-->
+                <action android:name="cn.jpush.android.intent.CONNECTION" /><!-- 接收网络变化 连接/断开 since 1.6.3 -->
+                <category android:name="com.benson.virus" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+    <!--这个权限允许访问振动设备-->
+    <uses-permission android:name="android.permission.VIBRATE" /><!-- 这个权限用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /><!-- 这个权限用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /><!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /><!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /><!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /><!-- 用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /><!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /><!-- 访问网络，网络定位需要上网-->
+    <uses-permission android:name="android.permission.INTERNET" /><!-- SD卡读取权限，用户写入离线定位数据-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+
+
+
+
+</manifest>
