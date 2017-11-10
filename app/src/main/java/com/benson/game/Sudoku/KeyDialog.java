@@ -52,8 +52,7 @@ public class KeyDialog extends Dialog {
         //为对话框当中所有的按钮设置监听器
         setListeners();
     }
-///Users/Benson/AndroidStudioProjects/Virus/app/src/main/res/drawable-v21/ic_headpicture.png
-    ///Users/Benson/AndroidStudioProjects/Virus/app/src/main/res/drawable-v21/ic_menu_camera.xml
+
     private void findViews() {
         keys[0] = findViewById(R.id.keypad_1);
         keys[1] = findViewById(R.id.keypad_2);

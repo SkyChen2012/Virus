@@ -81,11 +81,9 @@ public class GlobalRankingActivity extends Activity {
             }
         }).start();
     }
-
     class RankingDataThread extends Thread {
 
         private Handler mHandler;
-
         public RankingDataThread(Context context, Handler handler) {
             this.mHandler = handler;
         }
@@ -212,6 +210,7 @@ public class GlobalRankingActivity extends Activity {
      *            用户唯一标识
      * @return 排名列表
      */
+
     public List getRankingInfo(String uuid) {
         HttpURLConnection conn = null;
         try {

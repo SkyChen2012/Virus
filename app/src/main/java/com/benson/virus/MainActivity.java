@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.benson.game.AgileBuddy.Splash;
+import com.benson.game.Sudoku.SudokuView;
 import com.benson.virus.JPush.JPushUtil;
 
 
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
     }
 
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_game) {
             Log.i(TAG, "nav_game");
-            //setContentView(new SudokuView(this));
+//            setContentView(new SudokuView(this));
             //新建一个显式意图，第一个参数为当前Activity类对象，第二个参数为你要打开的Activity类
             Intent intent = new Intent(MainActivity.this, Splash.class);
             startActivity(intent);

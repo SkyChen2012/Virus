@@ -61,7 +61,9 @@
 
         <service android:name="com.benson.game.AgileBuddy.ScoreUpgrateService" />
         <!--AgileBuddy end-->
+        <!-- 数独 -->
 
+        <!--数独 end-->
         <!--game end-->
 
         <!--mall-->

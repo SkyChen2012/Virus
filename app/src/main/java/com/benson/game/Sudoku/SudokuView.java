@@ -22,7 +22,10 @@ public class SudokuView extends View {
     private int selectedX;
     private int selectedY;
 
-    private SudokuGame game = new SudokuGame();
+    private SudokuPuzzles sudokuPuzzles = new SudokuPuzzles(0);
+
+    // /需要修改..记录
+    private SudokuGame game = new SudokuGame(sudokuPuzzles.SudokuPuzzlesToString(sudokuPuzzles.creatSudoku()));
 
     public SudokuView(Context context) {
         super(context);
@@ -49,6 +52,7 @@ public class SudokuView extends View {
         Paint backgroundPaint = new Paint();
         //设置画笔的颜色
         backgroundPaint.setColor(getResources().getColor(R.color.Sudoku_background));
+
         //绘制背景色
         canvas.drawRect(0, 0, getWidth(), getHeight(), backgroundPaint);
 

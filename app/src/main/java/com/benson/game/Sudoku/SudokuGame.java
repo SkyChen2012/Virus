@@ -6,7 +6,7 @@ package com.benson.game.Sudoku;
 
 public class SudokuGame {
     // 数独初始化数据的基础
-    private final String str = "360000000004230800000004200"
+    private  String str = "360000000004230800000004200"
             + "070460003820000014500013020"
             + "001900000007048300000000045";
 
@@ -16,6 +16,12 @@ public class SudokuGame {
     private int used[][][] = new int[9][9][];
 
     public SudokuGame() {
+        sudoku = fromPuzzleString(str);
+        calculateAllUsedTiles();
+    }
+
+    public SudokuGame(String  SudokuStr) {
+        this.str = SudokuStr;
         sudoku = fromPuzzleString(str);
         calculateAllUsedTiles();
     }
