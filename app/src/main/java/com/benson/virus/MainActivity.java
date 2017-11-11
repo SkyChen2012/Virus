@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.Window;
 
 import com.benson.game.AgileBuddy.Splash;
+import com.benson.game.Sudoku.SudokuActivity;
 import com.benson.game.Sudoku.SudokuView;
 import com.benson.virus.JPush.JPushUtil;
 
@@ -121,6 +122,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_send) {
+            Intent intent = new Intent(MainActivity.this, SudokuActivity.class);
+            startActivity(intent);
 
         }
 

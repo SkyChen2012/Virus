@@ -30,7 +30,7 @@ public class SudokuPuzzles {
 
     /**
      * 打印二维数组，数独矩阵
-      * @param a 二维数组
+     * @param a 二维数组
      */
     private void printArray(int a[][])
     {
@@ -101,7 +101,7 @@ public class SudokuPuzzles {
             }
         }
         Log.d(TAG,"处理后的数组");
-        this.printArray(seedArray);
+        printArray(seedArray);
         return seedArray;
     }
 
@@ -123,10 +123,10 @@ public class SudokuPuzzles {
         };
         if (Debug) {
             Log.d(TAG, "原始的二维数组:");
-            this.printArray(seedArray);
+            printArray(seedArray);
         }
-        ArrayList<Integer> randomList=this.creatNineRondomArray();
-        seedArray = this.creatSudokuArray(seedArray, randomList);
+        ArrayList<Integer> randomList=creatNineRondomArray();
+        seedArray = creatSudokuArray(seedArray, randomList);
         return seedArray;
     }
 
@@ -136,7 +136,7 @@ public class SudokuPuzzles {
      * @return
      */
     public int[][] creatSudoku(int GameLevel) {
-        return this.creatSudoku();
+        return creatSudoku();
     }
 
     public String SudokuPuzzlesToString(int [][] Sudoku){
@@ -144,7 +144,7 @@ public class SudokuPuzzles {
         if (Sudoku.length > 0) {
             int i = 0,j = 0;
             for (i=0;i< Sudoku.length;i++){
-                for (j=0;j<Sudoku[j].length;j++){
+                for (j=0;j<Sudoku[i].length;j++){
                     SudokuStr.append(Sudoku[i][j]);
                 }
             }

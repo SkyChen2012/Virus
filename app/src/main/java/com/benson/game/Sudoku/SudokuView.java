@@ -4,6 +4,10 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -16,20 +20,42 @@ import com.benson.virus.R;
 
 public class SudokuView extends View {
 
+    private  final  static String Tag = "SudokuView";
     //单元格的宽度和高度
     private float width;
     private float height;
     private int selectedX;
     private int selectedY;
 
+    private Context mcontext;
+
+    private int[][] sudokuArray;
+    private String sudokuStr;
     private SudokuPuzzles sudokuPuzzles = new SudokuPuzzles(0);
 
-    // /需要修改..记录
-    private SudokuGame game = new SudokuGame(sudokuPuzzles.SudokuPuzzlesToString(sudokuPuzzles.creatSudoku()));
-
+    private SudokuGame game;
     public SudokuView(Context context) {
-        super(context);
+        this(context,null);
     }
+
+    public SudokuView(Context context ,AttributeSet attrs) {
+        this(context,attrs,0);
+    }
+
+    public SudokuView(Context context, AttributeSet attrs, int defStyle) {
+        super(context ,attrs ,defStyle);
+        init(context);
+        Log.i(Tag,"(Context context, AttributeSet attrs, int defStyle)");
+    }
+
+    private void init(Context context){
+        this.mcontext = context;
+        sudokuArray = sudokuPuzzles.creatSudoku();
+        sudokuStr = sudokuPuzzles.SudokuPuzzlesToString(sudokuArray);
+        Log.i(Tag,sudokuStr);
+        game = new SudokuGame(sudokuStr);
+    }
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -42,38 +68,45 @@ public class SudokuView extends View {
         }else{
             this.height = this.width;
         }
+        Log.i(Tag, "w:"+ w + "h:" + h + "oldw:" + oldw + "oldh:" + oldh);
         super.onSizeChanged(w, h, oldw, oldh);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int width = measureWidth(widthMeasureSpec);
+        int height = measureHeight(heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         //生成用于绘制背景色的画笔
         Paint backgroundPaint = new Paint();
         //设置画笔的颜色
-        backgroundPaint.setColor(getResources().getColor(R.color.Sudoku_background));
-
+        backgroundPaint.setColor( ResourcesCompat.getColor(getResources(),  R.color.Sudoku_background,null));
         //绘制背景色
         canvas.drawRect(0, 0, getWidth(), getHeight(), backgroundPaint);
 
         Paint darkPaint = new Paint();
-        darkPaint.setColor(getResources().getColor(R.color.Sudoku_dark));
+        darkPaint.setColor(ResourcesCompat.getColor(getResources(), R.color.Sudoku_dark,null));
 
         Paint hilitePaint = new Paint();
-        hilitePaint.setColor(getResources().getColor(R.color.Sudoku_hilite));
+        hilitePaint.setColor(ResourcesCompat.getColor(getResources(), R.color.Sudoku_hilite,null));
 
         Paint lightPaint = new Paint();
-        lightPaint.setColor(getResources().getColor(R.color.Sudoku_light));
-        for(int i = 0; i < 9 ;i++){
+        lightPaint.setColor(ResourcesCompat.getColor(getResources(), R.color.Sudoku_light,null));
+        for(int i = 0; i < 10 ;i++){
             //一下两行代码用户绘制横向的单元格线
             canvas.drawLine(0, i * height, getWidth(), i * height,lightPaint);
             canvas.drawLine(0, i * height + 1, getWidth(), i * height + 1, hilitePaint);
 
             canvas.drawLine(i * width, 0, i * width, getHeight(), lightPaint);
-            canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), hilitePaint);
+            canvas.drawLine(i * width +1, 0, i * width + 1, getHeight(), hilitePaint);
         }
 
-        for(int i = 0 ; i < 9;i++){
+        for(int i = 0 ; i < 10;i++){
             if(i % 3 != 0){
                 continue;
             }
@@ -116,19 +149,48 @@ public class SudokuView extends View {
 
         KeyDialog keyDialog = new KeyDialog(getContext(), used,this);
         keyDialog.show();
-        //LayoutInflater layoutInflater = LayoutInflater.from(this.getContext());
-        //View layoutView = layoutInflater.inflate(R.layout.keypad, null);
-        //TextView textView =(TextView)layoutView.findViewById(R.id.usedTextId);
-        //textView.setText(sb.toString());
-        //AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-        //builder.setView(layoutView);
-        //AlertDialog dialog = builder.create();
-        //dialog.show();
+
         return true;
     }
     public void setSelectedTile(int tile) {
         if (game.setTileIfValid(selectedX, selectedY, tile)) {
             invalidate();
         }
+    }
+
+    /**
+     * 根据xml的设定获取宽度/根据xml的设定获取高度
+     * @param measureSpec
+     * @return
+     */
+    private int measureWidth(int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        //wrap_content
+        if (specMode == MeasureSpec.AT_MOST){
+        }
+        //fill_parent或者精确值
+        else if (specMode == MeasureSpec.EXACTLY){
+        }
+        Log.i("这个控件的宽度----------","specMode=" + specMode + " specSize=" + specSize);
+        return specSize;
+    }
+
+    /**
+     * 根据xml的设定获取高度
+     * @param measureSpec
+     * @return
+     */
+    private int measureHeight(int measureSpec) {
+        int specMode = MeasureSpec.getMode(measureSpec);
+        int specSize = MeasureSpec.getSize(measureSpec);
+        //wrap_content
+        if (specMode == MeasureSpec.AT_MOST){
+        }
+        //fill_parent或者精确值
+        else if (specMode == MeasureSpec.EXACTLY){
+        }
+        Log.i("这个控件的高度----------","specMode:" + specMode + "specSize:" + specSize);
+        return specSize;
     }
 }

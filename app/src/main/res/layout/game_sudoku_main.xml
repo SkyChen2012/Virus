@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        >
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="用时: --:--"
+            android:gravity=""
+            />
+        <ImageView
+            android:layout_marginLeft="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="游戏关卡： --"
+            android:gravity=""
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/autoquery_layout"
+        android:layout_marginTop="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        >
+        <com.benson.game.Sudoku.SudokuView
+            android:id="@+id/Sudoku_View"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:id="@+id/BtnNo1"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="按钮一"
+            />
+        <Button
+            android:id="@+id/BtnNo2"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="按钮二"
+            />
+        <Button
+            android:id="@+id/BtnNo3"
+            android:layout_width="100dp"
+            android:layout_height="45dp"
+            android:text="按钮三"
+            />
+    </LinearLayout>
+
+    <com.benson.Tools.SignCricleView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        />
+
+
+</LinearLayout>

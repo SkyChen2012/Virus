@@ -10,7 +10,6 @@ import com.benson.virus.R;
 
 /**
  * Created by Benson.Chen on 2016/11/18.
- * <p>
  * 该类用于实现Dialog，实现自定义的对话框功能
  */
 

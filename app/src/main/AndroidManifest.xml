@@ -37,31 +37,34 @@
             android:name="com.benson.game.AgileBuddy.Splash"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.benson.game.AgileBuddy.AgileBuddyActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.benson.game.AgileBuddy.Prefs"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity
             android:name="com.benson.game.AgileBuddy.GlobalRankingActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/global_ranking"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.benson.game.AgileBuddy.TipsActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
 
         <service android:name="com.benson.game.AgileBuddy.ScoreUpgrateService" />
         <!--AgileBuddy end-->
         <!-- 数独 -->
+
+        <activity android:name="com.benson.game.Sudoku.SudokuActivity"
+            android:screenOrientation="portrait" />
 
         <!--数独 end-->
         <!--game end-->
