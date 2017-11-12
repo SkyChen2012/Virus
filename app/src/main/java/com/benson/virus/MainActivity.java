@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 
+import com.benson.BensonDB.SharedPreferences.XXSharedPreferences;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.Sudoku.SudokuActivity;
 import com.benson.game.Sudoku.SudokuView;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
-    private static final String TAG = "Virus - MainActivity";
+    private static final String TAG = "Virus_MainActivity";
     //极光调试
     public static boolean isForeground = false;
 
@@ -65,6 +67,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //调试
+
+        XXSharedPreferences xxSharedPreferences = XXSharedPreferences.getInstance();
+
+        xxSharedPreferences.save(this,"fuck1","666");
+        xxSharedPreferences.save(this,"fuck2","666");
+        xxSharedPreferences.save(this,"fuck3","666");
+
+        //调试 end
 
     }
 

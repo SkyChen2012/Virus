@@ -3,13 +3,17 @@ package com.benson.game.Sudoku;
 import android.app.Activity;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.benson.BensonDB.SharedPreferences.XXSharedPreferences;
 import com.benson.virus.R;
 
+import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 
 /**
@@ -38,6 +42,12 @@ public class SudokuActivity extends Activity  implements  View.OnClickListener {
 
     private  void  initView(){
         mSudokuView = (SudokuView)findViewById(R.id.Sudoku_View);
+
+        XXSharedPreferences xxSharedPreferences = XXSharedPreferences.getInstance();
+        SharedPreferences xSharedPreferences = xxSharedPreferences.getSharedPreferencesWithName(this,"config");
+        String value = xSharedPreferences.getString("fuck1","");
+
+        Log.i(Tag, value);
 
         No1 = (Button)findViewById(R.id.BtnNo1);
         No2 = (Button)findViewById(R.id.BtnNo2);

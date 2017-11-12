@@ -69,7 +69,7 @@ public class SudokuView extends View {
             this.height = this.width;
         }
         Log.i(Tag, "w:"+ w + "h:" + h + "oldw:" + oldw + "oldh:" + oldh);
-        super.onSizeChanged(w, h, oldw, oldh);
+        super.onSizeChanged(w+1, h+1, oldw, oldh);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class SudokuView extends View {
 
         Paint lightPaint = new Paint();
         lightPaint.setColor(ResourcesCompat.getColor(getResources(), R.color.Sudoku_light,null));
-        for(int i = 0; i < 10 ;i++){
+        for(int i = 1; i < 9 ;i++){
             //一下两行代码用户绘制横向的单元格线
             canvas.drawLine(0, i * height, getWidth(), i * height,lightPaint);
             canvas.drawLine(0, i * height + 1, getWidth(), i * height + 1, hilitePaint);
@@ -106,7 +106,7 @@ public class SudokuView extends View {
             canvas.drawLine(i * width +1, 0, i * width + 1, getHeight(), hilitePaint);
         }
 
-        for(int i = 0 ; i < 10;i++){
+        for(int i = 1 ; i < 10;i++){
             if(i % 3 != 0){
                 continue;
             }
@@ -115,6 +115,13 @@ public class SudokuView extends View {
             canvas.drawLine(i * width, 0, i * width, getHeight(), darkPaint);
             canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), hilitePaint);
         }
+
+
+
+
+
+
+
         //绘制数字
         Paint numberPaint = new Paint();
         numberPaint.setColor(Color.BLACK);
