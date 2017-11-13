@@ -10,23 +10,23 @@ import android.support.v7.app.AppCompatActivity;
  * 启动界面
  */
 
-public class SplashActivity extends AppCompatActivity {
+public class VirusAppCompaActivity extends AppCompatActivity {
 
-    private final String TAG = "SplashActivity";
+    private final String TAG = "VirusAppCompaActivity";
 
     private final int SPLASH_DISPLAY_LENGHT = 2000; // 两秒后进入系统
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_virus);
 
         new android.os.Handler().postDelayed(new Runnable() {
             public void run() {
-                Intent mainIntent = new Intent(SplashActivity.this,
+                Intent mainIntent = new Intent(VirusAppCompaActivity.this,
                         MainActivity.class);
-                SplashActivity.this.startActivity(mainIntent);
-                SplashActivity.this.finish();
+                VirusAppCompaActivity.this.startActivity(mainIntent);
+                VirusAppCompaActivity.this.finish();
             }
 
         }, SPLASH_DISPLAY_LENGHT);
