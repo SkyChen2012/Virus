@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity
         //调试
 
         XXSharedPreferences xxSharedPreferences = XXSharedPreferences.getInstance();
-
         xxSharedPreferences.save(this,"fuck1","666");
         xxSharedPreferences.save(this,"fuck2","666");
         xxSharedPreferences.save(this,"fuck3","666");
