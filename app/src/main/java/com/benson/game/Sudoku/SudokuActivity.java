@@ -1,5 +1,6 @@
 package com.benson.game.Sudoku;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 
@@ -40,15 +41,16 @@ public class SudokuActivity extends Activity  implements  View.OnClickListener {
         initView();
     }
 
+    @SuppressLint("CutPasteId")
     private  void  initView(){
         mSudokuView = (SudokuView)findViewById(R.id.Sudoku_View);
-
+//       测试
         XXSharedPreferences xxSharedPreferences = XXSharedPreferences.getInstance();
         SharedPreferences xSharedPreferences = xxSharedPreferences.getSharedPreferencesWithName(this,"config");
         String value = xSharedPreferences.getString("fuck1","");
-
         Log.i(Tag, value);
 
+//      测试结束
         No1 = (Button)findViewById(R.id.BtnNo1);
         No2 = (Button)findViewById(R.id.BtnNo2);
         No3 = (Button)findViewById(R.id.BtnNo2);

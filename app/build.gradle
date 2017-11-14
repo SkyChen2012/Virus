@@ -45,6 +45,8 @@ dependencies {
     compile 'cn.jiguang.sdk:jpush:3.0.1' // 此处以JPush 3.0.0 版本为 。
     compile 'cn.jiguang.sdk:jcore:1.1.0' // 此处以JCore 1.0.0 版本为 。
 
+    compile 'com.squareup.okhttp3:okhttp:3.9.0' //OKhttp
+
     testCompile 'junit:junit:4.12'
     compile files('src/main/libs/stringtree-json-2.0.5.jar')
     compile files('src/main/libs/json.jar')

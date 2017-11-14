@@ -22,4 +22,11 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 
+
+    <Button
+        android:layout_width="12px"
+        android:layout_height="12px"
+        android:text="Send"
+        android:id="@+id/BtnSend"
+        />
 </android.support.v4.widget.DrawerLayout>

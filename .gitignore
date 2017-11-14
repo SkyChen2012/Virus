@@ -19,8 +19,7 @@ build/
 .idea/vcs.xml  
 .idea/workspace.xml  
 .idea/libraries  
-  
-  
+  :
 # Built application files  
 *.apk  
 *.ap_  

@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,16 +18,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.Button;
 
 import com.benson.BensonDB.SharedPreferences.XXSharedPreferences;
+import com.benson.BensonNetWork.OkHttpUtil;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.Sudoku.SudokuActivity;
-import com.benson.game.Sudoku.SudokuView;
 import com.benson.virus.JPush.JPushUtil;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
 
     private static final String TAG = "Virus_MainActivity";
@@ -36,6 +44,13 @@ public class MainActivity extends AppCompatActivity
     public static boolean isForeground = false;
 
     //极光调试 end
+
+    // OK http调试
+
+    private Button mButtonSend;
+    private OkHttpUtil mOkHttpUtil;
+
+    // OK http调试 end
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +89,33 @@ public class MainActivity extends AppCompatActivity
         xxSharedPreferences.save(this,"fuck2","666");
         xxSharedPreferences.save(this,"fuck3","666");
 
+        mButtonSend = (Button)findViewById(R.id.BtnSend);
+
+        mButtonSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mOkHttpUtil = OkHttpUtil.getInstance();
+                mOkHttpUtil.getStringFromServerEnqueue("http://45.77.151.91:8080/Virus/version.txt", new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String htmlStr =  response.body().string();
+                        Log.i(TAG,"[response:" + response.toString() + "][call:"+ call.toString() +"][htmlStr:]"+ htmlStr);
+                    }
+                });
+
+            }
+        });
+
         //调试 end
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -173,6 +212,7 @@ public class MainActivity extends AppCompatActivity
         filter.addAction(MESSAGE_RECEIVED_ACTION);
         registerReceiver(mMessageReceiver, filter);
     }
+
 
     public class MessageReceiver extends BroadcastReceiver {
 
