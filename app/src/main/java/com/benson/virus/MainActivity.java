@@ -22,9 +22,12 @@ import android.widget.Button;
 
 import com.benson.BensonDB.SharedPreferences.XXSharedPreferences;
 import com.benson.BensonNetWork.OkHttpUtil;
+import com.benson.Tools.UpdateApp.AppUpdateInfo;
+import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.Sudoku.SudokuActivity;
 import com.benson.virus.JPush.JPushUtil;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -49,7 +52,7 @@ public class MainActivity extends AppCompatActivity
 
     private Button mButtonSend;
     private OkHttpUtil mOkHttpUtil;
-
+    private Context self;
     // OK http调试 end
 
     @Override
@@ -90,24 +93,13 @@ public class MainActivity extends AppCompatActivity
         xxSharedPreferences.save(this,"fuck3","666");
 
         mButtonSend = (Button)findViewById(R.id.BtnSend);
-
+        self = this;
         mButtonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                mOkHttpUtil = OkHttpUtil.getInstance();
-                mOkHttpUtil.getStringFromServerEnqueue("http://45.77.151.91:8080/Virus/version.txt", new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        String htmlStr =  response.body().string();
-                        Log.i(TAG,"[response:" + response.toString() + "][call:"+ call.toString() +"][htmlStr:]"+ htmlStr);
-                    }
-                });
+                UpdateManager updateManager = new UpdateManager(self);
+                updateManager.getAppInfocheckUpdate();
 
             }
         });

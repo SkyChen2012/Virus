@@ -16,17 +16,26 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.benson.BensonNetWork.OkHttpUtil;
 import com.benson.virus.R;
+import com.google.gson.Gson;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * com.benson.Tools.UpdateApp
@@ -35,12 +44,14 @@ import com.benson.virus.R;
 
 public class UpdateManager {
 
+    private static final String TAG ="UpdateManager";
     /* 下载中 */
     private static final int DOWNLOAD = 1;
     /* 下载结束 */
     private static final int DOWNLOAD_FINISH = 2;
-    /* 保存解析的XML信息 */
-    HashMap<String, String> mHashMap;
+
+    private static final int UPDATEINFO =3;
+
     /* 下载保存路径 */
     private String mSavePath;
     /* 记录进度条数量 */
@@ -52,6 +63,9 @@ public class UpdateManager {
     /* 更新进度条 */
     private ProgressBar mProgress;
     private Dialog mDownloadDialog;
+
+    private OkHttpUtil mOkHttpUtil;
+    private AppUpdateInfo mAppUpdateInfo;
 
     private Handler mHandler = new Handler()
     {
@@ -68,6 +82,9 @@ public class UpdateManager {
                     // 安装文件
                     installApk();
                     break;
+                case UPDATEINFO:
+                    checkUpdate();
+                    break;
                 default:
                     break;
             }
@@ -78,6 +95,30 @@ public class UpdateManager {
     {
         this.mContext = context;
     }
+
+
+    public  void getAppInfocheckUpdate() {
+
+        mOkHttpUtil = OkHttpUtil.getInstance();
+        mOkHttpUtil.getStringFromServerEnqueue("http://45.77.151.91:8080/Virus/version.txt", new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String htmlStr =  response.body().string();
+                Log.i(TAG,"[response:" + response.toString() + "][call:"+ call.toString() +"][htmlStr:]"+ htmlStr);
+                Gson gson = new Gson();
+                mAppUpdateInfo = gson.fromJson(htmlStr,AppUpdateInfo.class);
+                Log.i(TAG,"[AppName:" + mAppUpdateInfo.getAppName() + "]\r\n[Url:" + mAppUpdateInfo.getUrl() + "]\r\n[Version:" + mAppUpdateInfo.getVersion() + "]");
+
+                mHandler.sendEmptyMessage(UPDATEINFO);
+            }
+        });
+    }
+
 
     /**
      * 检测软件更新
@@ -103,20 +144,11 @@ public class UpdateManager {
     {
         // 获取当前软件版本
         int versionCode = getVersionCode(mContext);
-        // 把version.xml放到网络上，然后获取文件信息
-        InputStream inStream = ParseXmlService.class.getClassLoader().getResourceAsStream("version.xml");
-        // 解析XML文件。 由于XML文件比较小，因此使用DOM方式进行解析
-        ParseXmlService service = new ParseXmlService();
-        try
+        Log.i(TAG,"Local versionCode:" + versionCode);
+
+        if (null != mAppUpdateInfo)
         {
-            mHashMap = service.parseXml(inStream);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        if (null != mHashMap)
-        {
-            int serviceCode = Integer.valueOf(mHashMap.get("version"));
+            int serviceCode = Integer.valueOf(mAppUpdateInfo.getVersion());
             // 版本判断
             if (serviceCode > versionCode)
             {
@@ -137,8 +169,9 @@ public class UpdateManager {
         int versionCode = 0;
         try
         {
-            // 获取软件版本号，对应AndroidManifest.xml下android:versionCode
-            versionCode = context.getPackageManager().getPackageInfo("com.szy.update", 0).versionCode;
+            // 获取软件版本号，对应build.gradle下[defaultConfig--versionCode]
+            versionCode = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+
         } catch (NameNotFoundException e)
         {
             e.printStackTrace();
@@ -239,7 +272,7 @@ public class UpdateManager {
                     // 获得存储卡的路径
                     String sdpath = Environment.getExternalStorageDirectory() + "/";
                     mSavePath = sdpath + "download";
-                    URL url = new URL(mHashMap.get("url"));
+                    URL url = new URL(mAppUpdateInfo.getUrl());
                     // 创建连接
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.connect();
@@ -254,7 +287,7 @@ public class UpdateManager {
                     {
                         file.mkdir();
                     }
-                    File apkFile = new File(mSavePath, mHashMap.get("name"));
+                    File apkFile = new File(mSavePath, mAppUpdateInfo.getAppName());
                     FileOutputStream fos = new FileOutputStream(apkFile);
                     int count = 0;
                     // 缓存
@@ -297,7 +330,8 @@ public class UpdateManager {
      */
     private void installApk()
     {
-        File apkfile = new File(mSavePath, mHashMap.get("name"));
+        File apkfile = new File(mSavePath, mAppUpdateInfo.getAppName());
+        Log.i(TAG,apkfile.toString());
         if (!apkfile.exists())
         {
             return;
@@ -306,5 +340,6 @@ public class UpdateManager {
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
         mContext.startActivity(i);
+
     }
 }

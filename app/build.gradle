@@ -7,8 +7,8 @@ android {
         applicationId "com.benson.virus"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
@@ -46,6 +46,8 @@ dependencies {
     compile 'cn.jiguang.sdk:jcore:1.1.0' // 此处以JCore 1.0.0 版本为 。
 
     compile 'com.squareup.okhttp3:okhttp:3.9.0' //OKhttp
+
+    compile 'com.google.code.gson:gson:2.8.2' //Google JSON
 
     testCompile 'junit:junit:4.12'
     compile files('src/main/libs/stringtree-json-2.0.5.jar')
