@@ -19,23 +19,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
-import com.benson.BensonDB.SharedPreferences.XXSharedPreferences;
 import com.benson.BensonNetWork.OkHttpUtil;
-import com.benson.Tools.UpdateApp.AppUpdateInfo;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
-import com.benson.game.Sudoku.SudokuActivity;
+import com.benson.game.NumberGame.NumberActivity.TextSudokuActivity;
+import com.benson.game.NumberGame.NumberDB.NumberDB;
 import com.benson.virus.JPush.JPushUtil;
-import com.google.gson.Gson;
 
-import java.io.IOException;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 
 public class MainActivity extends AppCompatActivity
@@ -43,6 +38,7 @@ public class MainActivity extends AppCompatActivity
 
 
     private static final String TAG = "Virus_MainActivity";
+    private Context self;
     //极光调试
     public static boolean isForeground = false;
 
@@ -51,8 +47,10 @@ public class MainActivity extends AppCompatActivity
     // OK http调试
 
     private Button mButtonSend;
+    private int level = 1;
     private OkHttpUtil mOkHttpUtil;
-    private Context self;
+
+
     // OK http调试 end
 
     @Override
@@ -85,21 +83,37 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //检测App更新
+        checkUpdateApp(this);
+        self = this;
         //调试
 
-        XXSharedPreferences xxSharedPreferences = XXSharedPreferences.getInstance();
-        xxSharedPreferences.save(this,"fuck1","666");
-        xxSharedPreferences.save(this,"fuck2","666");
-        xxSharedPreferences.save(this,"fuck3","666");
 
         mButtonSend = (Button)findViewById(R.id.BtnSend);
-        self = this;
+
         mButtonSend.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View v) {
+                level ++;
 
-                UpdateManager updateManager = new UpdateManager(self);
-                updateManager.getAppInfocheckUpdate();
+                NumberDB numberDB = new NumberDB(self);
+                numberDB.onCreate();
+                numberDB.operation("AA","self",level,20*level);
+
+                Map map = numberDB.select("AA",9);
+
+                System.out.println("输出方式一：");
+                Set<Map.Entry<Integer,String>> set=map.entrySet();
+                Iterator<Map.Entry<Integer,String>> iter=set.iterator();
+                while(iter.hasNext()){
+                    Map.Entry<Integer,String> entry=iter.next();
+                    System.out.println("key-->"+entry.getKey());
+                    System.out.println("value-->"+entry.getValue());
+                }
+
+                Toast.makeText(self, "sdcard有误", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -163,7 +177,10 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_send) {
-            Intent intent = new Intent(MainActivity.this, SudokuActivity.class);
+//            Intent intent = new Intent(MainActivity.this,SudukuActivity.class);
+            Intent intent = new Intent(MainActivity.this,TextSudokuActivity.class);
+
+            intent.putExtra("level", ""+level);
             startActivity(intent);
 
         }
@@ -221,6 +238,16 @@ public class MainActivity extends AppCompatActivity
                 setCostomMsg(showMsg.toString());
             }
         }
+    }
+
+    /**
+     * 检测App更新 add by Benson
+     * @param context
+     */
+    private void checkUpdateApp(Context context){
+        Log.i(TAG,"检测App更新...");
+        UpdateManager updateManager = new UpdateManager(context);
+        updateManager.getAppInfocheckUpdate();
     }
 
     private void setCostomMsg(String msg){

@@ -1,8 +1,11 @@
 package com.benson.virus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.benson.Tools.UpdateApp.UpdateManager;
 
 /**
  * Created by Benson.Chen on 2016/11/28.
@@ -23,6 +26,7 @@ public class VirusAppCompaActivity extends AppCompatActivity {
 
         new android.os.Handler().postDelayed(new Runnable() {
             public void run() {
+
                 Intent mainIntent = new Intent(VirusAppCompaActivity.this,
                         MainActivity.class);
                 VirusAppCompaActivity.this.startActivity(mainIntent);

@@ -19,7 +19,7 @@
             android:text="用时:"
             android:gravity=""
             />
-        <com.benson.Tools.TimeView
+        <com.benson.views.TimeView
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -43,12 +43,19 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         >
-        <com.benson.game.Sudoku.SudokuView
+        <com.benson.game.NumberGame.Views.SudokuView
             android:id="@+id/Sudoku_View"
             android:layout_width="320dp"
             android:layout_height="320dp"
             android:layout_centerHorizontal="true"
             />
+
+        <!--<com.benson.game.NumberGame.Views.SudokuSurfaceView-->
+            <!--android:id="@+id/Sudoku_View"-->
+            <!--android:layout_width="320dp"-->
+            <!--android:layout_height="320dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--/>-->
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"

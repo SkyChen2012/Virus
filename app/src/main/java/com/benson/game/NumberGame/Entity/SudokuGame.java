@@ -1,4 +1,4 @@
-package com.benson.game.Sudoku;
+package com.benson.game.NumberGame.Entity;
 
 /**
  * Created by Benson.Chen on 2016/11/18.
@@ -109,7 +109,7 @@ public class SudokuGame {
         return c1;
     }
 
-    protected boolean setTileIfValid(int x, int y, int value) {
+    public boolean setTileIfValid(int x, int y, int value) {
         int tiles[] = getUsedTiles(x, y);
         if (value != 0) {
             for (int tile : tiles) {

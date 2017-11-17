@@ -68,7 +68,7 @@ public class XXSQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //输出更新数据库的日志信息
-        Log.i(Tag, "update Database------------->");
+        Log.i(Tag, "Upgrade Database------------->");
     }
 
 }

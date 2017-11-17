@@ -1,10 +1,11 @@
-package com.benson.game.Sudoku;
+package com.benson.game.NumberGame.Views;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import com.benson.game.NumberGame.Views.SudokuView;
 import com.benson.virus.R;
 
 

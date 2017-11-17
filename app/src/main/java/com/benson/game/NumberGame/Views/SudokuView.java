@@ -1,16 +1,18 @@
-package com.benson.game.Sudoku;
+package com.benson.game.NumberGame.Views;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.benson.game.NumberGame.Entity.SudokuArray;
+import com.benson.game.NumberGame.Entity.SudokuGame;
+import com.benson.game.Sudoku.SudokuPuzzles;
 import com.benson.virus.R;
 
 
@@ -31,7 +33,10 @@ public class SudokuView extends View {
 
     private int[][] sudokuArray;
     private String sudokuStr;
+    private String sudokuStr2;
+
     private SudokuPuzzles sudokuPuzzles = new SudokuPuzzles(0);
+    private SudokuArray numAloneArray = new SudokuArray(9, 5);
 
     private SudokuGame game;
     public SudokuView(Context context) {
@@ -53,7 +58,21 @@ public class SudokuView extends View {
         sudokuArray = sudokuPuzzles.creatSudoku();
         sudokuStr = sudokuPuzzles.SudokuPuzzlesToString(sudokuArray);
         Log.i(Tag,sudokuStr);
-        game = new SudokuGame(sudokuStr);
+        numAloneArray.begin();
+        StringBuffer SudokuStrBuf = new StringBuffer();
+        for (int m = 0; m < numAloneArray.getArray().length; m ++){
+            for (int n = 0; n < numAloneArray.getArray()[m].length ;n++){
+                Log.i(Tag,"numAloneArray.getArray()[" + m + "][" + n + "] = "+numAloneArray.getArray()[m][n].toString());
+                if (!numAloneArray.getArray()[m][n].isFlag()) {
+                    SudokuStrBuf.append(numAloneArray.getArray()[m][n].getSystemNum());
+                }else {
+                    SudokuStrBuf.append(0);
+                }
+
+            }
+        }
+        Log.i(Tag,"SudokuStrBuf:"+SudokuStrBuf.toString());
+        game = new SudokuGame(SudokuStrBuf.toString());
     }
 
 
@@ -115,12 +134,6 @@ public class SudokuView extends View {
             canvas.drawLine(i * width, 0, i * width, getHeight(), darkPaint);
             canvas.drawLine(i * width + 1, 0, i * width + 1, getHeight(), hilitePaint);
         }
-
-
-
-
-
-
 
         //绘制数字
         Paint numberPaint = new Paint();

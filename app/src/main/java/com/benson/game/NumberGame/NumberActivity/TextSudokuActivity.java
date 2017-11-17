@@ -1,4 +1,4 @@
-package com.benson.game.Sudoku;
+package com.benson.game.NumberGame.NumberActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,9 +12,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.benson.BensonDB.SharedPreferences.XXSharedPreferences;
+import com.benson.game.NumberGame.Views.SudokuView;
 import com.benson.virus.R;
-
-import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
 
 
 /**
@@ -22,7 +21,7 @@ import static android.support.v7.widget.StaggeredGridLayoutManager.TAG;
  * Created by Benson on 2017/11/10-上午10:57.
  */
 
-public class SudokuActivity extends Activity  implements  View.OnClickListener {
+public class TextSudokuActivity extends Activity  implements  View.OnClickListener {
 
     private  final static String Tag = "SudokuActivity";
 
@@ -30,7 +29,7 @@ public class SudokuActivity extends Activity  implements  View.OnClickListener {
     private Button No2;
     private Button No3;
 
-    private  SudokuView mSudokuView;
+    private SudokuView mSudokuView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

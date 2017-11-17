@@ -16,8 +16,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Environment;
@@ -51,6 +49,8 @@ public class UpdateManager {
     private static final int DOWNLOAD_FINISH = 2;
 
     private static final int UPDATEINFO =3;
+
+    private String VersionUrl = "http://45.77.151.91:8080/Virus/version.txt";
 
     /* 下载保存路径 */
     private String mSavePath;
@@ -96,11 +96,10 @@ public class UpdateManager {
         this.mContext = context;
     }
 
-
     public  void getAppInfocheckUpdate() {
 
         mOkHttpUtil = OkHttpUtil.getInstance();
-        mOkHttpUtil.getStringFromServerEnqueue("http://45.77.151.91:8080/Virus/version.txt", new Callback() {
+        mOkHttpUtil.getStringFromServerEnqueue(VersionUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -109,7 +108,6 @@ public class UpdateManager {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 String htmlStr =  response.body().string();
-                Log.i(TAG,"[response:" + response.toString() + "][call:"+ call.toString() +"][htmlStr:]"+ htmlStr);
                 Gson gson = new Gson();
                 mAppUpdateInfo = gson.fromJson(htmlStr,AppUpdateInfo.class);
                 Log.i(TAG,"[AppName:" + mAppUpdateInfo.getAppName() + "]\r\n[Url:" + mAppUpdateInfo.getUrl() + "]\r\n[Version:" + mAppUpdateInfo.getVersion() + "]");
