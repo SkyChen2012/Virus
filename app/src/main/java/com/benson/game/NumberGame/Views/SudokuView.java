@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.benson.game.NumberGame.Entity.SudokuArray;
 import com.benson.game.NumberGame.Entity.SudokuGame;
-import com.benson.game.Sudoku.SudokuPuzzles;
 import com.benson.virus.R;
 
 
@@ -35,7 +34,6 @@ public class SudokuView extends View {
     private String sudokuStr;
     private String sudokuStr2;
 
-    private SudokuPuzzles sudokuPuzzles = new SudokuPuzzles(0);
     private SudokuArray numAloneArray = new SudokuArray(9, 5);
 
     private SudokuGame game;
@@ -55,8 +53,6 @@ public class SudokuView extends View {
 
     private void init(Context context){
         this.mcontext = context;
-        sudokuArray = sudokuPuzzles.creatSudoku();
-        sudokuStr = sudokuPuzzles.SudokuPuzzlesToString(sudokuArray);
         Log.i(Tag,sudokuStr);
         numAloneArray.begin();
         StringBuffer SudokuStrBuf = new StringBuffer();

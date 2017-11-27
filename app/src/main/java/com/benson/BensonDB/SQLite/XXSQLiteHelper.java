@@ -58,11 +58,11 @@ public class XXSQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "create table stu_table(id int,sname varchar(20),sage int,ssex varchar(10))";
+//        String sql = "create table stu_table(id int,sname varchar(20),sage int,ssex varchar(10))";
         //输出创建数据库的日志信息
         Log.i(Tag, "create Database------------->");
         //execSQL函数用于执行SQL语句
-        db.execSQL(sql);
+//        db.execSQL(sql);
     }
 
     @Override

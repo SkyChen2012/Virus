@@ -9,6 +9,9 @@ import cn.jpush.android.api.JPushInterface;
 import com.benson.Tools.CrashHandler;
 import com.benson.Tools.Utils;
 import com.benson.Tools.XXUtils.XXFileUtils;
+import com.mob.MobApplication;
+import com.mob.MobSDK;
+
 
 
 /**
@@ -16,7 +19,7 @@ import com.benson.Tools.XXUtils.XXFileUtils;
  * Created by Benson on 2017/2/13-下午8:36.
  */
 
-public class virusApplication extends Application {
+public class virusApplication extends MobApplication {
 
     private static final String TAG = "virusApplication";
 
@@ -27,6 +30,8 @@ public class virusApplication extends Application {
         SendErrorLog();
 
         InitJPushSDK();
+
+//        MobSDK.init(this, "1f35afb98e***","0fe8807a4bed3f15d4dd00e4e8e1****");
 
     }
 

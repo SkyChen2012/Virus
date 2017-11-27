@@ -34,6 +34,13 @@ android {
         }
     }
 }
+
+repositories{
+    flatDir{
+        dirs 'src/main/libs' //就是你放aar的目录地址
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -49,7 +56,13 @@ dependencies {
 
     compile 'com.google.code.gson:gson:2.8.2' //Google JSON
 
+    compile name:'SMSSDK-3.0.0',ext:'aar' //SMS
+    compile name:'SMSSDKGUI-3.0.0',ext:'aar' //SMS
+    compile files('src/main/libs/MobCommons-2017.0607.1736.jar')
+    compile files('src/main/libs/MobTools-2017.0607.1736.jar')
+
     testCompile 'junit:junit:4.12'
+
     compile files('src/main/libs/stringtree-json-2.0.5.jar')
     compile files('src/main/libs/json.jar')
 

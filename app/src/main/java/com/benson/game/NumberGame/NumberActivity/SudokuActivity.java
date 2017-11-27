@@ -21,7 +21,7 @@ import com.benson.virus.R;
  * Created by Benson on 2017/11/10-上午10:57.
  */
 
-public class TextSudokuActivity extends Activity  implements  View.OnClickListener {
+public class SudokuActivity extends Activity  implements  View.OnClickListener {
 
     private  final static String Tag = "SudokuActivity";
 
@@ -43,6 +43,7 @@ public class TextSudokuActivity extends Activity  implements  View.OnClickListen
     @SuppressLint("CutPasteId")
     private  void  initView(){
         mSudokuView = (SudokuView)findViewById(R.id.Sudoku_View);
+
 //       测试
         XXSharedPreferences xxSharedPreferences = XXSharedPreferences.getInstance();
         SharedPreferences xSharedPreferences = xxSharedPreferences.getSharedPreferencesWithName(this,"config");

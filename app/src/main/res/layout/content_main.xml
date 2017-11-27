@@ -30,6 +30,26 @@
             android:text="Send"
             android:id="@+id/BtnSend"
             />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="发送短信验证码"
+            android:id="@+id/play"
+            />
+        <EditText
+            android:id="@+id/yanzhengma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入手机验证码"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tijiao"
+            android:text="提交"
+            />
+
     </LinearLayout>
 
 </RelativeLayout>

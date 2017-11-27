@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,22 +20,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.benson.BensonNetWork.OkHttpUtil;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
-import com.benson.game.NumberGame.NumberActivity.TextSudokuActivity;
+import com.benson.game.NumberGame.NumberActivity.SudokuActivity;
 import com.benson.game.NumberGame.NumberDB.NumberDB;
 import com.benson.virus.JPush.JPushUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import cn.smssdk.SMSSDK;
+import cn.smssdk.EventHandler;
+
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener{
 
 
     private static final String TAG = "Virus_MainActivity";
@@ -47,10 +55,12 @@ public class MainActivity extends AppCompatActivity
     // OK http调试
 
     private Button mButtonSend;
+    private Button playButtonSend;
+    private Button tijiaomButtonSend;
+    private EditText yanzhengma;
     private int level = 1;
     private OkHttpUtil mOkHttpUtil;
-
-
+    public EventHandler eventHandler;
     // OK http调试 end
 
     @Override
@@ -90,12 +100,104 @@ public class MainActivity extends AppCompatActivity
 
 
         mButtonSend = (Button)findViewById(R.id.BtnSend);
+        playButtonSend = (Button)findViewById(R.id.play);
+        tijiaomButtonSend = (Button)findViewById(R.id.tijiao);
+        yanzhengma = (EditText)findViewById(R.id.yanzhengma);
 
-        mButtonSend.setOnClickListener(new View.OnClickListener() {
+        mButtonSend.setOnClickListener(this);
+        playButtonSend.setOnClickListener(this);
+        tijiaomButtonSend.setOnClickListener(this);
 
 
+
+        // 如果希望在读取通信录的时候提示用户，可以添加下面的代码，并且必须在其他代码调用之前，否则不起作用；如果没这个需求，可以不加这行代码
+//        SMSSDK.setAskPermisionOnReadContact(false);
+//
+//        // 创建EventHandler对象
+//        eventHandler = new EventHandler() {
+//            public void afterEvent(int event, int result, Object data) {
+//                if (data instanceof Throwable) {
+//                    Throwable throwable = (Throwable) data;
+//                     final String SMSmsg = throwable.getMessage();
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            Toast.makeText(MainActivity.this, SMSmsg, Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                } else {
+//                    if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
+//                        // 处理你自己的逻辑
+//                    }
+//                }
+//            }
+//        };
+//
+//            // 注册监听器
+//        SMSSDK.registerEventHandler( eventHandler);
+
+
+        eventHandler = new EventHandler(){
             @Override
-            public void onClick(View v) {
+            public void afterEvent(int event, int result, Object data) {
+                if (result == SMSSDK.RESULT_COMPLETE){
+                    //回调完成
+                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+                        //提交验证码成功
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this,"验证成功",Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(MainActivity.this,Main2Activity.class);
+//                                startActivity(intent);
+                            }
+                        });
+
+                    }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+                        //获取验证码成功
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this,"验证码已发送",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
+
+
+
+                    }
+                }else{
+                    ((Throwable)data).printStackTrace();
+                    Throwable throwable = (Throwable) data;
+                    try {
+                        JSONObject obj = new JSONObject(throwable.getMessage());
+                        final String des = obj.optString("detail");
+                        if (!TextUtils.isEmpty(des)){
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(MainActivity.this,"提交错误信息",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        };
+
+        SMSSDK.registerEventHandler(eventHandler);
+
+        //调试 end
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.BtnSend:{
                 level ++;
 
                 NumberDB numberDB = new NumberDB(self);
@@ -114,14 +216,33 @@ public class MainActivity extends AppCompatActivity
                 }
 
                 Toast.makeText(self, "sdcard有误", Toast.LENGTH_SHORT).show();
+            }
+                break;
+            case R.id.play:{
+                SMSSDK.getVerificationCode("86","13456231239");
+            }
+                break;
+            case R.id.tijiao:{
+                String number = yanzhengma.getText().toString();
+                SMSSDK.submitVerificationCode("86","13456231239",number);
 
             }
-        });
+                break;
+            default:
+                break;
+        }
 
-        //调试 end
 
     }
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        SMSSDK.unregisterEventHandler(eventHandler);
+
+    }
 
     @Override
     public void onBackPressed() {
@@ -178,7 +299,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 //            Intent intent = new Intent(MainActivity.this,SudukuActivity.class);
-            Intent intent = new Intent(MainActivity.this,TextSudokuActivity.class);
+            Intent intent = new Intent(MainActivity.this,SudokuActivity.class);
 
             intent.putExtra("level", ""+level);
             startActivity(intent);
@@ -221,6 +342,9 @@ public class MainActivity extends AppCompatActivity
         filter.addAction(MESSAGE_RECEIVED_ACTION);
         registerReceiver(mMessageReceiver, filter);
     }
+
+
+
 
 
     public class MessageReceiver extends BroadcastReceiver {

@@ -29,5 +29,11 @@ public class AppUpdateInfo {
     public String getUrl() {
         return url;
     }
+
+
+    @Override
+    public String toString() {
+        return "AppUpdateInfo:[AppName-" + AppName + "].[version-" + version + "].[url-" + url +"]";
+    }
 }
 
