@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity
     private Button playButtonSend;
     private Button tijiaomButtonSend;
     private EditText yanzhengma;
+    private EditText shoujihaoma;
+
     private int level = 1;
     private OkHttpUtil mOkHttpUtil;
     public EventHandler eventHandler;
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity
         playButtonSend = (Button)findViewById(R.id.play);
         tijiaomButtonSend = (Button)findViewById(R.id.tijiao);
         yanzhengma = (EditText)findViewById(R.id.yanzhengma);
+        shoujihaoma = (EditText)findViewById(R.id.shoujihaoma);
 
         mButtonSend.setOnClickListener(this);
         playButtonSend.setOnClickListener(this);
@@ -219,12 +222,14 @@ public class MainActivity extends AppCompatActivity
             }
                 break;
             case R.id.play:{
-                SMSSDK.getVerificationCode("86","13456231239");
+                String number = shoujihaoma.getText().toString();
+                SMSSDK.getVerificationCode("86",number);
             }
                 break;
             case R.id.tijiao:{
                 String number = yanzhengma.getText().toString();
-                SMSSDK.submitVerificationCode("86","13456231239",number);
+                String number2 = shoujihaoma.getText().toString();
+                SMSSDK.submitVerificationCode("86",number2,number);
 
             }
                 break;

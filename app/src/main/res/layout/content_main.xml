@@ -30,7 +30,12 @@
             android:text="Send"
             android:id="@+id/BtnSend"
             />
-
+        <EditText
+            android:id="@+id/shoujihaoma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入手机号码 13456788888"
+            />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

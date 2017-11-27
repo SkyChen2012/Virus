@@ -31,7 +31,7 @@ public class SudokuView extends View {
     private Context mcontext;
 
     private int[][] sudokuArray;
-    private String sudokuStr;
+    private String sudokuStr = "nothing";
     private String sudokuStr2;
 
     private SudokuArray numAloneArray = new SudokuArray(9, 5);
