@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.benson.BensonNetWork.OkHttpUtil;
+import com.benson.Tools.Login.LoginActivity;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.NumberGame.NumberActivity.SudokuActivity;
@@ -222,8 +223,12 @@ public class MainActivity extends AppCompatActivity
             }
                 break;
             case R.id.play:{
-                String number = shoujihaoma.getText().toString();
-                SMSSDK.getVerificationCode("86",number);
+//                String number = shoujihaoma.getText().toString();
+//                SMSSDK.getVerificationCode("86",number);
+
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+
+                startActivity(intent);
             }
                 break;
             case R.id.tijiao:{

@@ -23,4 +23,9 @@
     <color name="home_item_selector">#ffc9c9c9</color>
     <color name="home_item_normal">#fff2f2f2</color>
 
+    <!--login-->
+    <color name="colorlogin_text">#3F51B5</color>
+    <color name="colorLoginEditText">#ffc9c9c9</color>
+    <color name="colorlogin_button">#FF1899E9</color>
+
 </resources>

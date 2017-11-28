@@ -77,6 +77,10 @@
         <meta-data android:name="Mob-AppSecret" android:value="986caef09a8eda6c2eb7e3d128879527"/>
 
         <!-- 短信SDK end-->
+
+        <!--登录-->
+        <activity android:name="com.benson.Tools.Login.LoginActivity"/>
+        <!--登录end-->
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
             android:name=".JPush.JPushReceiver"
