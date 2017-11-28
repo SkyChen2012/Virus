@@ -24,7 +24,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.benson.BensonNetWork.OkHttpUtil;
-import com.benson.Tools.Login.LoginActivity;
+import com.benson.Tools.Login.LoginSignInActivity;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.NumberGame.NumberActivity.SudokuActivity;
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity
 
     private int level = 1;
     private OkHttpUtil mOkHttpUtil;
-    public EventHandler eventHandler;
+
     // OK http调试 end
 
     @Override
@@ -141,58 +141,7 @@ public class MainActivity extends AppCompatActivity
 //        SMSSDK.registerEventHandler( eventHandler);
 
 
-        eventHandler = new EventHandler(){
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                if (result == SMSSDK.RESULT_COMPLETE){
-                    //回调完成
-                    if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                        //提交验证码成功
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MainActivity.this,"验证成功",Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(MainActivity.this,Main2Activity.class);
-//                                startActivity(intent);
-                            }
-                        });
 
-                    }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
-                        //获取验证码成功
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MainActivity.this,"验证码已发送",Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
-
-
-
-                    }
-                }else{
-                    ((Throwable)data).printStackTrace();
-                    Throwable throwable = (Throwable) data;
-                    try {
-                        JSONObject obj = new JSONObject(throwable.getMessage());
-                        final String des = obj.optString("detail");
-                        if (!TextUtils.isEmpty(des)){
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(MainActivity.this,"提交错误信息",Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        };
-
-        SMSSDK.registerEventHandler(eventHandler);
 
         //调试 end
 
@@ -223,18 +172,14 @@ public class MainActivity extends AppCompatActivity
             }
                 break;
             case R.id.play:{
-//                String number = shoujihaoma.getText().toString();
-//                SMSSDK.getVerificationCode("86",number);
 
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                Intent intent = new Intent(MainActivity.this,LoginSignInActivity.class);
 
                 startActivity(intent);
             }
                 break;
             case R.id.tijiao:{
-                String number = yanzhengma.getText().toString();
-                String number2 = shoujihaoma.getText().toString();
-                SMSSDK.submitVerificationCode("86",number2,number);
+
 
             }
                 break;
@@ -249,8 +194,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        SMSSDK.unregisterEventHandler(eventHandler);
 
     }
 

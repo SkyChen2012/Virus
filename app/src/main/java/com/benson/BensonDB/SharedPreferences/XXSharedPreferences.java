@@ -26,6 +26,7 @@ public class XXSharedPreferences {
     public static synchronized XXSharedPreferences getInstance() {
         if (instance == null) {
             instance = new XXSharedPreferences();
+
         }
         return instance;
     }

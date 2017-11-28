@@ -78,9 +78,11 @@
 
         <!-- 短信SDK end-->
 
-        <!--登录-->
-        <activity android:name="com.benson.Tools.Login.LoginActivity"/>
-        <!--登录end-->
+        <!--登录/注册-->
+        <activity android:name="com.benson.Tools.Login.LoginSignInActivity"/>
+        <activity android:name="com.benson.Tools.Login.LoginSignUpActivity"/>
+        <!--登录/注册end-->
+
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
             android:name=".JPush.JPushReceiver"

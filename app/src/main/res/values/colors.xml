@@ -26,6 +26,6 @@
     <!--login-->
     <color name="colorlogin_text">#3F51B5</color>
     <color name="colorLoginEditText">#ffc9c9c9</color>
-    <color name="colorlogin_button">#FF1899E9</color>
+    <color name="login_button">#FF1899E9</color>
 
 </resources>

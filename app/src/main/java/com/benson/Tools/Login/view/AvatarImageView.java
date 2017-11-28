@@ -1,4 +1,4 @@
-package com.benson.Tools.Login;
+package com.benson.Tools.Login.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
