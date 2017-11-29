@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入手机号码 13456788888"
+            android:visibility="visible"
             />
         <Button
             android:layout_width="match_parent"
@@ -47,12 +48,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入手机验证码"
+            android:visibility="visible"
+
             />
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tijiao"
             android:text="提交"
+            android:visibility="visible"
+
             />
 
     </LinearLayout>

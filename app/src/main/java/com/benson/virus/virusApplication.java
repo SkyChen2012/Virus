@@ -56,7 +56,9 @@ public class virusApplication extends MobApplication {
         ch.init(getApplicationContext());
         try {
             XXFileUtils.MakeDir(CrashHandler.getError_log_path());
-            File file = new File(CrashHandler.getError_log_path() + CrashHandler.getError_log_name());
+            String path = CrashHandler.getError_log_path() + CrashHandler.getError_log_name();
+            Log.i(TAG,path);
+            File file = new File(path);
             if (!file.exists()) {
                 file.createNewFile();
             }

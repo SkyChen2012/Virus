@@ -151,24 +151,24 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.BtnSend:{
-                level ++;
-
-                NumberDB numberDB = new NumberDB(self);
-                numberDB.onCreate();
-                numberDB.operation("AA","self",level,20*level);
-
-                Map map = numberDB.select("AA",9);
-
-                System.out.println("输出方式一：");
-                Set<Map.Entry<Integer,String>> set=map.entrySet();
-                Iterator<Map.Entry<Integer,String>> iter=set.iterator();
-                while(iter.hasNext()){
-                    Map.Entry<Integer,String> entry=iter.next();
-                    System.out.println("key-->"+entry.getKey());
-                    System.out.println("value-->"+entry.getValue());
-                }
-
-                Toast.makeText(self, "sdcard有误", Toast.LENGTH_SHORT).show();
+//                level ++;
+//
+//                NumberDB numberDB = new NumberDB(self);
+//                numberDB.onCreate();
+//                numberDB.operation("AA","self",level,20*level);
+//
+//                Map map = numberDB.select("AA",9);
+//
+//                System.out.println("输出方式一：");
+//                Set<Map.Entry<Integer,String>> set=map.entrySet();
+//                Iterator<Map.Entry<Integer,String>> iter=set.iterator();
+//                while(iter.hasNext()){
+//                    Map.Entry<Integer,String> entry=iter.next();
+//                    System.out.println("key-->"+entry.getKey());
+//                    System.out.println("value-->"+entry.getValue());
+//                }
+//
+//                Toast.makeText(self, "sdcard有误", Toast.LENGTH_SHORT).show();
             }
                 break;
             case R.id.play:{
