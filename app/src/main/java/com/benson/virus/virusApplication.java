@@ -3,15 +3,18 @@ package com.benson.virus;
 import android.app.Application;
 import android.util.Log;
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import cn.jpush.android.api.JPushInterface;
+import okhttp3.OkHttpClient;
 
 import com.benson.Tools.CrashHandler;
 import com.benson.Tools.Utils;
 import com.benson.Tools.XXUtils.XXFileUtils;
 import com.mob.MobApplication;
 import com.mob.MobSDK;
-
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.log.LoggerInterceptor;
 
 
 /**
@@ -32,6 +35,20 @@ public class virusApplication extends MobApplication {
         InitJPushSDK();
 
 //        MobSDK.init(this, "1f35afb98e***","0fe8807a4bed3f15d4dd00e4e8e1****");
+        InitNetWork();
+
+    }
+
+    private void InitNetWork() {
+
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(new LoggerInterceptor("TAG"))
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                //其他配置
+                .build();
+
+        OkHttpUtils.initClient(okHttpClient);
 
     }
 

@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,7 +26,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.benson.BensonNetWork.OkHttpUtil;
+import com.benson.BensonNetWork.XXOkHttpUtil;
 import com.benson.virus.R;
 import com.google.gson.Gson;
 
@@ -64,7 +63,7 @@ public class UpdateManager {
     private ProgressBar mProgress;
     private Dialog mDownloadDialog;
 
-    private OkHttpUtil mOkHttpUtil;
+    private XXOkHttpUtil mOkHttpUtil;
     private AppUpdateInfo mAppUpdateInfo;
 
     private Handler mHandler = new Handler()
@@ -98,7 +97,7 @@ public class UpdateManager {
 
     public  void getAppInfocheckUpdate() {
 
-        mOkHttpUtil = OkHttpUtil.getInstance();
+        mOkHttpUtil = XXOkHttpUtil.getInstance();
         mOkHttpUtil.getStringFromServerEnqueue(VersionUrl, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

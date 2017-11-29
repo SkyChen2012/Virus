@@ -7,7 +7,6 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,25 +20,13 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.benson.BensonNetWork.OkHttpUtil;
+import com.benson.BensonNetWork.XXOkHttpUtil;
 import com.benson.Tools.Login.LoginSignInActivity;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.NumberGame.NumberActivity.SudokuActivity;
-import com.benson.game.NumberGame.NumberDB.NumberDB;
 import com.benson.virus.JPush.JPushUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
-import cn.smssdk.SMSSDK;
-import cn.smssdk.EventHandler;
 
 
 public class MainActivity extends AppCompatActivity
@@ -62,7 +49,7 @@ public class MainActivity extends AppCompatActivity
     private EditText shoujihaoma;
 
     private int level = 1;
-    private OkHttpUtil mOkHttpUtil;
+    private XXOkHttpUtil mOkHttpUtil;
 
     // OK http调试 end
 

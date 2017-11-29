@@ -15,6 +15,10 @@ import android.widget.Toast;
 
 import com.benson.virus.MainActivity;
 import com.benson.virus.R;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+
+import okhttp3.Call;
 
 
 /**
@@ -84,25 +88,26 @@ public class LoginSignInActivity extends Activity implements  View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.login_sign_in_Button:{
-                id_login.getPaint().setFlags(0);
-                idvalue=id_login.getText().toString();
-                password_login.getPaint().setFlags(0);
-                passwordvalue=password_login.getText().toString();
 
+                denglu();
 
-                if (idvalue.equals("13456231239")&&passwordvalue.equals("1234567890")){
-                    if (rememberpassword_login.isChecked()){
-                        SharedPreferences.Editor editor=sp.edit();
-                        editor.putString("PHONEEDIT",idvalue);
-                        editor.putString("PASSWORD",passwordvalue);
-                        editor.commit();
-                    }
-                    Intent intent = new Intent(LoginSignInActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    Toast.makeText(LoginSignInActivity.this, "手机号码或密码错误，请重新登录", Toast.LENGTH_SHORT).show();
-                }
+//                id_login.getPaint().setFlags(0);
+//                idvalue=id_login.getText().toString();
+//                password_login.getPaint().setFlags(0);
+//                passwordvalue=password_login.getText().toString();
+//                if (idvalue.equals("13456231239")&&passwordvalue.equals("1234567890")){
+//                    if (rememberpassword_login.isChecked()){
+//                        SharedPreferences.Editor editor=sp.edit();
+//                        editor.putString("PHONEEDIT",idvalue);
+//                        editor.putString("PASSWORD",passwordvalue);
+//                        editor.commit();
+//                    }
+//                    Intent intent = new Intent(LoginSignInActivity.this,MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
+//                }else{
+//                    Toast.makeText(LoginSignInActivity.this, "手机号码或密码错误，请重新登录", Toast.LENGTH_SHORT).show();
+//                }
             }
                 break;
 
@@ -145,4 +150,43 @@ public class LoginSignInActivity extends Activity implements  View.OnClickListen
                 break;
         }
     }
+
+
+    private void denglu(){
+
+
+
+        String url = "http://45.77.151.91:9090/login";
+        try {
+            OkHttpUtils
+                    .post()
+                    .url(url)
+                    .addParams("uname", id_login.getText().toString())
+                    .addParams("upwd", password_login.getText().toString())
+                    .build()
+                    .execute(new StringCallback()
+                    {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.i(TAG,"onError....");
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.i(TAG,"onResponse ==> [id:" + id + "][response:" + response + "]");
+
+                            Toast.makeText(LoginSignInActivity.this,response,Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(LoginSignInActivity.this,MainActivity.class);
+                            startActivity(intent);
+
+                        }
+
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

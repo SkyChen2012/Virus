@@ -4,20 +4,31 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.benson.BensonNetWork.XXOkHttpUtil;
 import com.benson.virus.MainActivity;
 import com.benson.virus.R;
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.Callback;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * com.benson.Tools.Login
@@ -67,7 +78,27 @@ public class LoginSignUpActivity extends Activity implements  OnClickListener{
     }
 
     private void initSMS() {
+
         eventHandler = new EventHandler(){
+
+            @Override
+            public void onRegister() {
+                super.onRegister();
+                Log.i(Tag,"onRegister...");
+            }
+
+            @Override
+            public void beforeEvent(int i, Object o) {
+                super.beforeEvent(i, o);
+                Log.i(Tag,"beforeEvent ==> [i:" + i + "]");
+            }
+
+            @Override
+            public void onUnregister() {
+                super.onUnregister();
+                Log.i(Tag,"onUnregister...");
+            }
+
             @Override
             public void afterEvent(int event, int result, Object data) {
                 if (result == SMSSDK.RESULT_COMPLETE){
@@ -78,8 +109,9 @@ public class LoginSignUpActivity extends Activity implements  OnClickListener{
                             @Override
                             public void run() {
                                 Toast.makeText(LoginSignUpActivity.this,"验证成功",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginSignUpActivity.this,MainActivity.class);
-                                startActivity(intent);
+
+                                zhuce();
+
                             }
                         });
 
@@ -119,6 +151,7 @@ public class LoginSignUpActivity extends Activity implements  OnClickListener{
         };
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -131,6 +164,7 @@ public class LoginSignUpActivity extends Activity implements  OnClickListener{
                 String nuVerification_Codember = sign_up_Verification_Code.getText().toString();
                 String number = sign_up_id.getText().toString();
                 SMSSDK.submitVerificationCode("86",number,nuVerification_Codember);
+
             }
             break;
             default:
@@ -138,6 +172,41 @@ public class LoginSignUpActivity extends Activity implements  OnClickListener{
         }
 
     }
+
+    private void zhuce(){
+        String url = "http://45.77.151.91:9090/register";
+        try {
+            OkHttpUtils
+                    .post()
+                    .url(url)
+                    .addParams("uname", sign_up_id.getText().toString())
+                    .addParams("upwd", sign_up_password.getText().toString())
+                    .build()
+                    .execute(new StringCallback()
+                    {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.i(Tag,"onError....");
+                        }
+
+                        @Override
+                        public void onResponse(String response, int id) {
+                            Log.i(Tag,"onResponse ==> [id:" + id + "][response:" + response + "]");
+
+                            Toast.makeText(LoginSignUpActivity.this,response,Toast.LENGTH_SHORT).show();
+
+                            Intent intent = new Intent(LoginSignUpActivity.this,LoginSignInActivity.class);
+                            startActivity(intent);
+
+                        }
+
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     protected void onDestroy() {

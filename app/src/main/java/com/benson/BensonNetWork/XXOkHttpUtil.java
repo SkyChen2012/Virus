@@ -17,26 +17,26 @@ import okhttp3.Response;
  */
 
 
-public class OkHttpUtil {
+public class XXOkHttpUtil {
 
     private static final String TAG ="OkHttpUtil";
     private OkHttpClient mOkHttpClient;
     private static final String CHARSET_NAME = "UTF-8";
 
     /* 持有私有静态实例，防止被引用，此处赋值为null，目的是实现延迟加载 */
-    private static OkHttpUtil instance = null;
+    private static XXOkHttpUtil instance = null;
 
     /* 私有构造方法，防止被实例化 */
-    private OkHttpUtil() {
+    private XXOkHttpUtil() {
         Init();
     }
     /**
      * 懒汉式变种，解决线程安全问题
      * @return
      */
-    public static synchronized OkHttpUtil getInstance() {
+    public static synchronized XXOkHttpUtil getInstance() {
         if (instance == null) {
-            instance = new OkHttpUtil();
+            instance = new XXOkHttpUtil();
         }
         return instance;
     }

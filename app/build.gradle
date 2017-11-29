@@ -52,14 +52,15 @@ dependencies {
     compile 'cn.jiguang.sdk:jpush:3.0.1' // 此处以JPush 3.0.0 版本为 。
     compile 'cn.jiguang.sdk:jcore:1.1.0' // 此处以JCore 1.0.0 版本为 。
 
-    compile 'com.squareup.okhttp3:okhttp:3.9.0' //OKhttp
+    compile 'com.squareup.okhttp3:okhttp:3.3.1' //OKhttp
+    compile 'com.zhy:okhttputils:2.6.2' //okhttp-utils
 
     compile 'com.google.code.gson:gson:2.8.2' //Google JSON
 
     compile name:'SMSSDK-3.0.0',ext:'aar' //SMS
     compile name:'SMSSDKGUI-3.0.0',ext:'aar' //SMS
-    compile files('src/main/libs/MobCommons-2017.0607.1736.jar')
-    compile files('src/main/libs/MobTools-2017.0607.1736.jar')
+    compile files('src/main/libs/MobCommons-2017.0607.1736.jar')//SMS
+    compile files('src/main/libs/MobTools-2017.0607.1736.jar')//SMS
 
     testCompile 'junit:junit:4.12'
 
