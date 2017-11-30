@@ -10,10 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.stringtree.json.ExceptionErrorListener;
-import org.stringtree.json.JSONReader;
-import org.stringtree.json.JSONValidatingReader;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -225,11 +221,11 @@ public class GlobalRankingActivity extends Activity {
             dos.close();
             DataInputStream dis = new DataInputStream(conn.getInputStream());
             String resultInfo = dis.readUTF();
-            if (resultInfo != null && !"ERROR".equals(resultInfo)) {
-                JSONReader reader = new JSONValidatingReader(
-                        new ExceptionErrorListener());
-                return (List) reader.read(resultInfo);
-            }
+//            if (resultInfo != null && !"ERROR".equals(resultInfo)) {
+//                JSONReader reader = new JSONValidatingReader(
+//                        new ExceptionErrorListener());
+//                return (List) reader.read(resultInfo);
+//            }
             dis.close();
         } catch (Exception e) {
             Log.e("", "", e);

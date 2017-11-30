@@ -127,4 +127,9 @@
     <string name="textlogin_password">密码</string>
     <string name="textlogin_id">手机号码</string>
 
+    <!--地图-->
+    <string name="startlocation">开始定位</string>
+    <string name="stoplocation">停止定位</string>
+
+
 </resources>

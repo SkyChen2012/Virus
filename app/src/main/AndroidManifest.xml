@@ -70,12 +70,11 @@
         <!--mall-->
 
         <!--mall end-->
-        <!-- 短信SDK -->
 
+        <!-- 短信SDK -->
         <!-- 通过AndroidManifest配置AppKey和AppSecret，如果你选择通过代码配置，则不需要配置以下meta-data -->
         <meta-data android:name="Mob-AppKey" android:value="22a6b8ad57680"/>
         <meta-data android:name="Mob-AppSecret" android:value="986caef09a8eda6c2eb7e3d128879527"/>
-
         <!-- 短信SDK end-->
 
         <!--登录/注册-->
@@ -85,6 +84,7 @@
 
         <!--地图-->
         <service android:name="com.benson.Map.MapService"/>
+        <activity android:name="com.benson.Map.LocationActivity"/>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -97,6 +97,7 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="ahg9gkl4PKqZNZvvlsGoZFzSppfAeGGt" />  <!--http://lbsyun.baidu.com/apiconsole/key-->
+        <!-- meta-data需要写在application中 -->
         <!--地图 end-->
 
         <!-- User defined.  For test only  用户自定义的广播接收器-->
@@ -113,9 +114,6 @@
                 <category android:name="com.benson.virus" />
             </intent-filter>
         </receiver>
-
-
-
     </application>
 
     <uses-permission android:name="android.permission.VIBRATE" /><!-- 允许访问振动设备-->
@@ -135,7 +133,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" /><!--读取系统底层日志-->
     <uses-permission android:name="android.permission.WAKE_LOCK" /><!--允许程序在手机屏幕关闭后后台进程仍然运行-->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" /><!--允许程序读取或写入系统设置-->
-
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.CAMERA"/><!--请求访问使用照相设备-->
 
 </manifest>

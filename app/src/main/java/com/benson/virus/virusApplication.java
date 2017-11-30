@@ -1,6 +1,8 @@
 package com.benson.virus;
 
 import android.app.Application;
+import android.app.Service;
+import android.os.Vibrator;
 import android.util.Log;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -8,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
+import com.benson.Map.LocationService;
 import com.benson.Tools.CrashHandler;
 import com.benson.Tools.Utils;
 import com.benson.Tools.XXUtils.XXFileUtils;
@@ -15,6 +18,7 @@ import com.mob.MobApplication;
 import com.mob.MobSDK;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
+
 
 
 /**
@@ -25,6 +29,9 @@ import com.zhy.http.okhttp.log.LoggerInterceptor;
 public class virusApplication extends MobApplication {
 
     private static final String TAG = "virusApplication";
+
+    public LocationService locationService;
+    public Vibrator mVibrator;
 
     @Override
     public void onCreate() {
@@ -37,6 +44,17 @@ public class virusApplication extends MobApplication {
 //        MobSDK.init(this, "1f35afb98e***","0fe8807a4bed3f15d4dd00e4e8e1****");
         InitNetWork();
 
+        InitBDMap();
+
+    }
+
+    private void InitBDMap() {
+
+        /***
+         * 初始化定位sdk，建议在Application中创建
+         */
+        locationService = new LocationService(getApplicationContext());
+        mVibrator =(Vibrator)getApplicationContext().getSystemService(Service.VIBRATOR_SERVICE);
     }
 
     private void InitNetWork() {

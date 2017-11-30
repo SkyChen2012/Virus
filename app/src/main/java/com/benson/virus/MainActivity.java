@@ -21,7 +21,12 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.benson.BensonNetWork.XXOkHttpUtil;
+import com.benson.Map.LocationActivity;
 import com.benson.Map.MapService;
 import com.benson.Tools.Login.LoginSignInActivity;
 import com.benson.Tools.UpdateApp.UpdateManager;
@@ -48,9 +53,15 @@ public class MainActivity extends AppCompatActivity
     private Button tijiaomButtonSend;
     private EditText yanzhengma;
     private EditText shoujihaoma;
+    private Button startBtn;
+    private Button stopBtn;
+    private EditText tvCity;
+
 
     private int level = 1;
     private XXOkHttpUtil mOkHttpUtil;
+    private LocationClientOption  mOption;;
+    private LocationClient mLocationClient;//定位的核心类
 
     // OK http调试 end
 
@@ -96,11 +107,13 @@ public class MainActivity extends AppCompatActivity
         yanzhengma = (EditText)findViewById(R.id.yanzhengma);
         shoujihaoma = (EditText)findViewById(R.id.shoujihaoma);
 
+
         mButtonSend.setOnClickListener(this);
         playButtonSend.setOnClickListener(this);
         tijiaomButtonSend.setOnClickListener(this);
 
 
+        setBaiduLBS();
 
         // 如果希望在读取通信录的时候提示用户，可以添加下面的代码，并且必须在其他代码调用之前，否则不起作用；如果没这个需求，可以不加这行代码
 //        SMSSDK.setAskPermisionOnReadContact(false);
@@ -318,4 +331,30 @@ public class MainActivity extends AppCompatActivity
 //        }
     }
 
+
+
+    private void setBaiduLBS() {
+
+        startBtn = (Button)findViewById(R.id.startBtn);
+        stopBtn = (Button)findViewById(R.id.stopBtn);
+        tvCity = (EditText) findViewById(R.id.tvCity);
+
+        startBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"startBtn.setOnClickListener。。。。");
+
+                Intent intent = new Intent(MainActivity.this,LocationActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        stopBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG,"stopBtn.setOnClickListener。。。。");
+
+            }
+        });
+    }
 }
