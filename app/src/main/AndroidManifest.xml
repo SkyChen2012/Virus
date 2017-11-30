@@ -83,6 +83,8 @@
         <activity android:name="com.benson.Tools.Login.LoginSignUpActivity"/>
         <!--登录/注册end-->
 
+        <!--地图-->
+        <service android:name="com.benson.Map.MapService"/>
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
             android:name=".JPush.JPushReceiver"

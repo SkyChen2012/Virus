@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.benson.BensonNetWork.XXOkHttpUtil;
+import com.benson.Map.MapService;
 import com.benson.Tools.Login.LoginSignInActivity;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
@@ -138,31 +139,17 @@ public class MainActivity extends AppCompatActivity
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.BtnSend:{
-//                level ++;
-//
-//                NumberDB numberDB = new NumberDB(self);
-//                numberDB.onCreate();
-//                numberDB.operation("AA","self",level,20*level);
-//
-//                Map map = numberDB.select("AA",9);
-//
-//                System.out.println("输出方式一：");
-//                Set<Map.Entry<Integer,String>> set=map.entrySet();
-//                Iterator<Map.Entry<Integer,String>> iter=set.iterator();
-//                while(iter.hasNext()){
-//                    Map.Entry<Integer,String> entry=iter.next();
-//                    System.out.println("key-->"+entry.getKey());
-//                    System.out.println("value-->"+entry.getValue());
-//                }
-//
-//                Toast.makeText(self, "sdcard有误", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, MapService.class);
+                startService(intent);
+
             }
                 break;
             case R.id.play:{
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, MapService.class);
+                stopService(intent);
 
-                Intent intent = new Intent(MainActivity.this,LoginSignInActivity.class);
-
-                startActivity(intent);
             }
                 break;
             case R.id.tijiao:{
@@ -210,6 +197,12 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
+            Log.i(TAG, "注册/登录...... ");
+
+            Intent intent = new Intent(MainActivity.this,LoginSignInActivity.class);
+            startActivity(intent);
+
             return true;
         }
 
@@ -310,6 +303,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void checkUpdateApp(Context context){
         Log.i(TAG,"检测App更新...");
+
         UpdateManager updateManager = new UpdateManager(context);
         updateManager.getAppInfocheckUpdate();
     }
