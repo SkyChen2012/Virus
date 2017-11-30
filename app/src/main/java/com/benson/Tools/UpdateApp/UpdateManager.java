@@ -109,7 +109,7 @@ public class UpdateManager {
                 String htmlStr =  response.body().string();
                 Gson gson = new Gson();
                 mAppUpdateInfo = gson.fromJson(htmlStr,AppUpdateInfo.class);
-                Log.i(TAG,"[AppName:" + mAppUpdateInfo.getAppName() + "]\r\n[Url:" + mAppUpdateInfo.getUrl() + "]\r\n[Version:" + mAppUpdateInfo.getVersion() + "]");
+                Log.i(TAG,mAppUpdateInfo.toString());
 
                 mHandler.sendEmptyMessage(UPDATEINFO);
             }
@@ -259,13 +259,11 @@ public class UpdateManager {
     private class downloadApkThread extends Thread
     {
         @Override
-        public void run()
-        {
+        public void run() {
             try
             {
                 // 判断SD卡是否存在，并且是否具有读写权限
-                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-                {
+                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     // 获得存储卡的路径
                     String sdpath = Environment.getExternalStorageDirectory() + "/";
                     mSavePath = sdpath + "download";
@@ -280,8 +278,7 @@ public class UpdateManager {
 
                     File file = new File(mSavePath);
                     // 判断文件目录是否存在
-                    if (!file.exists())
-                    {
+                    if (!file.exists()) {
                         file.mkdir();
                     }
                     File apkFile = new File(mSavePath, mAppUpdateInfo.getAppName());
@@ -290,16 +287,14 @@ public class UpdateManager {
                     // 缓存
                     byte buf[] = new byte[1024];
                     // 写入到文件中
-                    do
-                    {
+                    do {
                         int numread = is.read(buf);
                         count += numread;
                         // 计算进度条位置
                         progress = (int) (((float) count / length) * 100);
                         // 更新进度
                         mHandler.sendEmptyMessage(DOWNLOAD);
-                        if (numread <= 0)
-                        {
+                        if (numread <= 0) {
                             // 下载完成
                             mHandler.sendEmptyMessage(DOWNLOAD_FINISH);
                             break;
@@ -310,11 +305,9 @@ public class UpdateManager {
                     fos.close();
                     is.close();
                 }
-            } catch (MalformedURLException e)
-            {
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             // 取消下载对话框显示
