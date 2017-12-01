@@ -5,11 +5,14 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.benson.Tools.XXUtils.XXTimeUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * com.benson.Tools
@@ -23,8 +26,8 @@ public  class CrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 错误日志
      */
-    private static String ERROR_LOG_PATH = "/com/NumberGame/classroom/error/";
-    private static String error_log_name = "numbergame-error.log";
+    private static String ERROR_LOG_PATH = "/com/benson/virus/error/";
+    private static String error_log_name = "virus-error.log";
     private static String error_log_path = android.os.Environment.getExternalStorageDirectory() + "" + ERROR_LOG_PATH;
 
     /**
@@ -92,21 +95,17 @@ public  class CrashHandler implements Thread.UncaughtExceptionHandler {
             error += line;
         }
         br.close();
-//        new Thread() {
-//            public void run() {
-//                try {
-//                    String mtype = android.os.Build.MODEL;
-//                    String mbrand = android.os.Build.BRAND;
-//                    MailTool.sendMail(mail_error_log_name + mbrand + "-"
-//                                    + mtype + "-" + System.currentTimeMillis(),
-//                            error);
-//                    file.delete();
-//                } catch (MessagingException e) {
-//                    e.printStackTrace();
-//                }
-//            };
-//        }.start();
+        new Thread() {
+            public void run() {
+                /**
+                 * 发送错误log到服务器
+                 */
+            };
+        }.start();
     }
+
+
+
 
     /**
      * 自定义错误处理,收集错误信息 发送错误报告等操作均在此完成. 开发者可以根据自己的情况来自定义异常处理逻辑

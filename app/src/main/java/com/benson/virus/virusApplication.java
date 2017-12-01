@@ -1,6 +1,5 @@
 package com.benson.virus;
 
-import android.app.Application;
 import android.app.Service;
 import android.os.Vibrator;
 import android.util.Log;
@@ -12,10 +11,8 @@ import okhttp3.OkHttpClient;
 
 import com.benson.Map.LocationService;
 import com.benson.Tools.CrashHandler;
-import com.benson.Tools.Utils;
 import com.benson.Tools.XXUtils.XXFileUtils;
 import com.mob.MobApplication;
-import com.mob.MobSDK;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.log.LoggerInterceptor;
 
@@ -41,7 +38,6 @@ public class virusApplication extends MobApplication {
 
         InitJPushSDK();
 
-//        MobSDK.init(this, "1f35afb98e***","0fe8807a4bed3f15d4dd00e4e8e1****");
         InitNetWork();
 
         InitBDMap();
@@ -105,5 +101,4 @@ public class virusApplication extends MobApplication {
 
         return true;
     }
-
 }
