@@ -42,6 +42,7 @@
             android:layout_height="wrap_content"
             android:text="发送短信验证码"
             android:id="@+id/play"
+            android:visibility="gone"
             />
         <EditText
             android:id="@+id/yanzhengma"

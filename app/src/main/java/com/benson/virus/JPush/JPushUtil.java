@@ -1,5 +1,6 @@
 package com.benson.virus.JPush;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -99,6 +100,7 @@ public class JPushUtil {
         return (info != null && info.isConnected());
     }
 
+    @SuppressLint("MissingPermission")
     public static String getImei(Context context, String imei) {
         try {
             TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
@@ -108,6 +110,7 @@ public class JPushUtil {
         }
         return imei;
     }
+
     public static String getDeviceId(Context context) {
         String deviceId = JPushInterface.getUdid(context);
         return deviceId;

@@ -4,6 +4,7 @@ import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.Poi;
+import com.benson.Map.Bean.MapBean;
 import com.benson.Map.LocationService;
 import com.benson.virus.R;
 import com.benson.virus.virusApplication;
@@ -15,6 +16,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * com.benson.virus
@@ -111,10 +115,8 @@ public class LocationActivity extends Activity {
     }
 
 
-    /*****
-     *
+    /**
      * 定位结果回调，重写onReceiveLocation方法，可以直接拷贝如下代码到自己工程中修改
-     *
      */
     private BDAbstractLocationListener mListener = new BDAbstractLocationListener() {
 
@@ -123,6 +125,38 @@ public class LocationActivity extends Activity {
             // TODO Auto-generated method stub
             if (null != location && location.getLocType() != BDLocation.TypeServerError) {
                 StringBuffer sb = new StringBuffer(256);
+
+                MapBean mapBean = new MapBean();
+                mapBean.setTime(location.getTime());
+                mapBean.setLocType(location.getLocType());
+                mapBean.setLocTypeDescription(location.getLocTypeDescription());
+                mapBean.setLatitude(location.getLatitude());
+                mapBean.setLontitude(location.getLongitude());
+                mapBean.setRadius(location.getRadius());
+                mapBean.setCountryCode(location.getCountryCode());
+                mapBean.setCountry(location.getCountry());
+                mapBean.setCitycode(location.getCityCode());
+                mapBean.setCity(location.getCity());
+                mapBean.setDistrict(location.getDistrict());
+                mapBean.setStreet(location.getStreet());
+                mapBean.setAddr(location.getAddrStr());
+                mapBean.setUserIndoorState(location.getUserIndoorState());
+                mapBean.setDirection(location.getDirection());
+                mapBean.setLocationdescribe(location.getLocationDescribe());
+                List<String> poiList = new ArrayList<String>();
+                if (location.getPoiList() != null && !location.getPoiList().isEmpty()) {
+                    for (int i = 0; i < location.getPoiList().size(); i++) {
+                        Poi poi = (Poi) location.getPoiList().get(i);
+                        poiList.add(poi.getName());
+                    }
+                }
+                mapBean.setPoi(poiList);
+                MapBean.TypeGpsLocationBean typeGpsLocationBean = new MapBean.TypeGpsLocationBean();
+                typeGpsLocationBean.setSpeed(location.getSpeed());
+                typeGpsLocationBean.setSatellite(location.getSatelliteNumber());
+
+
+
                 sb.append("time : ");
                 /**
                  * 时间也可以使用systemClock.elapsedRealtime()方法 获取的是自从开机以来，每次回调的时间；

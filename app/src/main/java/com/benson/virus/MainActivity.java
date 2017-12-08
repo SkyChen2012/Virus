@@ -21,8 +21,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.benson.BensonNetWork.XXOkHttpUtil;
@@ -115,33 +113,6 @@ public class MainActivity extends AppCompatActivity
 
         setBaiduLBS();
 
-        // 如果希望在读取通信录的时候提示用户，可以添加下面的代码，并且必须在其他代码调用之前，否则不起作用；如果没这个需求，可以不加这行代码
-//        SMSSDK.setAskPermisionOnReadContact(false);
-//
-//        // 创建EventHandler对象
-//        eventHandler = new EventHandler() {
-//            public void afterEvent(int event, int result, Object data) {
-//                if (data instanceof Throwable) {
-//                    Throwable throwable = (Throwable) data;
-//                     final String SMSmsg = throwable.getMessage();
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            Toast.makeText(MainActivity.this, SMSmsg, Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                } else {
-//                    if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE) {
-//                        // 处理你自己的逻辑
-//                    }
-//                }
-//            }
-//        };
-//
-//            // 注册监听器
-//        SMSSDK.registerEventHandler( eventHandler);
-
-
 
 
         //调试 end
@@ -166,8 +137,7 @@ public class MainActivity extends AppCompatActivity
             }
                 break;
             case R.id.tijiao:{
-
-
+                Log.i(TAG, "bluetoothActivity...... ");
             }
                 break;
             default:

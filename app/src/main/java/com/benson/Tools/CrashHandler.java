@@ -1,9 +1,13 @@
 package com.benson.Tools;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.benson.BensonNetWork.XXNetWorkUtil;
 import com.benson.Tools.XXUtils.XXTimeUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -87,19 +91,24 @@ public  class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     // TODO 使用HTTP Post 发送错误报告到服务器 这里不再做详细描述
-    public void postReport(final File file) throws Exception {
+    public void postReport(final String filePath) throws Exception {
 
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String line = "";
-        while ((line = br.readLine()) != null) {
-            error += line;
-        }
-        br.close();
+//        BufferedReader br = new BufferedReader(new FileReader(file));
+//        String line = "";
+//        while ((line = br.readLine()) != null) {
+//            error += line;
+//        }
+//        br.close();
         new Thread() {
             public void run() {
                 /**
                  * 发送错误log到服务器
                  */
+
+                XXNetWorkUtil xxNetWorkUtil = new XXNetWorkUtil();
+                HashMap<String,String> hashMap =new HashMap<>();
+                hashMap.put("name","Benson");
+                xxNetWorkUtil.upLoadFile(filePath,hashMap);
             };
         }.start();
     }
@@ -134,7 +143,14 @@ public  class CrashHandler implements Thread.UncaughtExceptionHandler {
                     FileOutputStream fos = new FileOutputStream(file, true);
                     fos.write(new String("=================Start:Error Info=================\n").getBytes());
                     fos.write(new String("Time:" + XXTimeUtils.getCurTime() + "\n").getBytes());
-
+                    //当前系统
+                    fos.write(new String("OS version:" + Build.VERSION.RELEASE + "_" + Build.VERSION.SDK_INT).getBytes());
+                    //制造商
+                    fos.write(new String("Vendor:" + Build.MANUFACTURER).getBytes());
+                    //手机型号
+                    fos.write(new String("Model:" + Build.MODEL).getBytes());
+                    //CPU架构
+                    fos.write(new String("CPU ABI:" + Build.CPU_ABI).getBytes());
                     String mtype = android.os.Build.MODEL;
                     String mbrand = android.os.Build.BRAND;
                     String versionSdk = android.os.Build.VERSION.SDK;
@@ -142,6 +158,7 @@ public  class CrashHandler implements Thread.UncaughtExceptionHandler {
                     fos.write(new String("Mobile Brand:" + mbrand + "\n").getBytes());
                     fos.write(new String("Mobile Mode:" + mtype + "\n").getBytes());
                     fos.write(new String("SDK:" + versionSdk + "\n\n").getBytes());
+
 
                     fos.write(message.getBytes());
                     for (int i = 0; i < stack.length; i++) {

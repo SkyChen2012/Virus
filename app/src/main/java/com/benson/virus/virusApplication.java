@@ -93,7 +93,7 @@ public class virusApplication extends MobApplication {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            ch.postReport(file);
+            ch.postReport(path);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
