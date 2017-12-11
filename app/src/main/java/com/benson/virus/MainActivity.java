@@ -30,6 +30,7 @@ import com.benson.Tools.Login.LoginSignInActivity;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.NumberGame.NumberActivity.SudokuActivity;
+import com.benson.virus.Bluetooth.BluetoothMainActivity;
 import com.benson.virus.JPush.JPushUtil;
 
 
@@ -138,6 +139,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.tijiao:{
                 Log.i(TAG, "bluetoothActivity...... ");
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, BluetoothMainActivity.class);
+                startActivity(intent);
             }
                 break;
             default:

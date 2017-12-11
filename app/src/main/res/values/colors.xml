@@ -28,4 +28,9 @@
     <color name="colorLoginEditText">#ffc9c9c9</color>
     <color name="login_button">#FF1899E9</color>
 
+<!--Bluetooth-->
+    <color name="Bluetooth_colorPrimary">#1DE9B6</color>
+    <color name="Bluetooth_colorPrimaryDark">#1DE9B6</color>
+    <color name="Bluetooth_colorAccent">#FF5722</color>
+
 </resources>
