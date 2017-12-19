@@ -43,19 +43,18 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         >
-        <com.benson.game.NumberGame.Views.SudokuView
-            android:id="@+id/Sudoku_View"
-            android:layout_width="320dp"
-            android:layout_height="320dp"
-            android:layout_centerHorizontal="true"
-            />
-
-        <!--<com.benson.game.NumberGame.Views.SudokuSurfaceView-->
+        <!--<com.benson.game.NumberGame.Views.SudokuView-->
             <!--android:id="@+id/Sudoku_View"-->
             <!--android:layout_width="320dp"-->
             <!--android:layout_height="320dp"-->
             <!--android:layout_centerHorizontal="true"-->
             <!--/>-->
+        <com.benson.game.NumberGame.Views.SudokuSurfaceView
+            android:id="@+id/Sudoku_View"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:layout_centerHorizontal="true"
+            />
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"

@@ -11,24 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.benson.BensonNetWork.XXOkHttpUtil;
-import com.benson.virus.MainActivity;
 import com.benson.virus.R;
-import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 import cn.smssdk.EventHandler;
 import cn.smssdk.SMSSDK;
 import okhttp3.Call;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * com.benson.Tools.Login

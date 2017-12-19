@@ -54,7 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tijiao"
-            android:text="提交" />
+            android:text="提交"
+            android:visibility="gone"/>
 
         <Button
             android:layout_width="match_parent"
@@ -73,5 +74,4 @@
             android:id="@+id/tvCity"
             />
     </LinearLayout>
-
 </RelativeLayout>

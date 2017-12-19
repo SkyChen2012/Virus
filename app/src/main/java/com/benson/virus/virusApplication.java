@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
-import com.benson.Map.LocationService;
+import com.benson.Tools.Map.LocationService;
 import com.benson.Tools.CrashHandler;
 import com.benson.Tools.XXUtils.XXFileUtils;
 import com.mob.MobApplication;

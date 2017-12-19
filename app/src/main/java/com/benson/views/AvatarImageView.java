@@ -25,11 +25,11 @@ public class AvatarImageView extends ImageView {
     private Paint paint = new Paint();
 
     public AvatarImageView(Context context) {
-        super(context);
+        this(context,null);
     }
 
     public AvatarImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs,0);
     }
 
     public AvatarImageView(Context context, AttributeSet attrs, int defStyle) {

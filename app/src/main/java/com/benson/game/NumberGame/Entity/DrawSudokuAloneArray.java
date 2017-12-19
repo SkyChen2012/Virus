@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.util.Log;
 
 import com.benson.game.NumberGame.NumberTools.ClickFlag;
 import com.benson.game.NumberGame.NumberTools.Constant;
@@ -19,6 +20,7 @@ import com.benson.game.NumberGame.NumberTools.Constant;
 
 public class DrawSudokuAloneArray {
 
+    private final static String Tag = "DrawSudokuAloneArray";
     /**
      * 为了避免浪费堆空间全局用一个矩形
      */
@@ -54,15 +56,21 @@ public class DrawSudokuAloneArray {
     /**
      * 排序数组对象
      * */
-    SudokuArray array;
+    private SudokuArray array;
 
     /**
      * 为排序的构造函数
      * */
     public DrawSudokuAloneArray(SudokuArray array) {
-        this.array = array;
+
         rectf = new RectF();
         this.array = array;
+
+        init();
+    }
+
+    public void init(){
+
         int x = array.getArray().length;
         numSpace = (12 / x) * Constant.density;
         roundX = (35 / x) * Constant.density;
@@ -73,15 +81,22 @@ public class DrawSudokuAloneArray {
         mapLeft = numSpace;
         mapRight = Constant.width - numSpace;
         rectWidth = (mapRight - mapLeft) / x;
+
+
         mapTop = ((Constant.height - Constant.width) - 2*rectWidth - 2 * numSpace);
         mapBottom = Constant.height - 2*rectWidth;
+
+//        Log.i(Tag,"mapLeft=>" + mapLeft +"|| mapRight=>"+ mapRight + "mapTop=>" + mapTop +"|| mapBottom=>"+ mapBottom);
         numSize = (int) (rectWidth / 3);
+
     }
+
 
     /* 绘画汇总 */
     public void onDrawMap(Canvas canvas, Paint paint) {
 		/*绘制的按钮背景*/
         drawBackground(canvas,paint,clickX,clickY);
+
         for (int i = 0; i < array.getArray().length; i++) {
             for (int j = 0; j < array.getArray().length; j++) {
 
@@ -110,10 +125,14 @@ public class DrawSudokuAloneArray {
 
     /**
      * 判断点击事件
-     * 1.点击事件     a.点击棋盘 选中棋盘 然后再候选区中显示候选区中的数字 b.点击普通按键将数字放入候选区中
-     *          c.点击候选区中的数字表示用户已经确认了该数字
-     * 2.长按事件     a.长按棋盘 表示将用户已经确认了的数字去掉显示候选区中的数字
-     *          b.长按普通按键表示用户已经确认了数字 c.长按候选区按键表示删去该数字
+     * 1.点击事件
+     *  a.点击棋盘 选中棋盘 然后再候选区中显示候选区中的数字
+     *  b.点击普通按键将数字放入候选区中
+     *  c.点击候选区中的数字表示用户已经确认了该数字
+     * 2.长按事件
+     *  a.长按棋盘 表示将用户已经确认了的数字去掉显示候选区中的数字
+     *  b.长按普通按键表示用户已经确认了数字
+     *  c.长按候选区按键表示删去该数字
      * */
     public void clickEvent(float x, float y, int clickFlag) {
         if(clickFlag == ClickFlag.click){
@@ -278,7 +297,8 @@ public class DrawSudokuAloneArray {
         }
         else {
 			/* 没有抹去的数字。显示系统的数字 */
-            paint.setColor(Color.argb(255, 0, 0, 0));
+            paint.setColor(Color.argb(255, 200, 0, 0));
+
             paint.setTextSize(numSize);
             paint.setTypeface(Typeface.DEFAULT_BOLD);
             textWidth = paint.measureText(node.systemNum + "");

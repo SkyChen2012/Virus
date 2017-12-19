@@ -15,6 +15,8 @@ public class SudokuGame {
     //用于存储每个单元格已经不可用的数据
     private int used[][][] = new int[9][9][];
 
+    private SudokuArray numAloneArray;
+
     public SudokuGame() {
         sudoku = fromPuzzleString(str);
         calculateAllUsedTiles();
@@ -26,10 +28,19 @@ public class SudokuGame {
         calculateAllUsedTiles();
     }
 
+    public SudokuGame(SudokuArray  numAloneArray) {
+        this.numAloneArray = numAloneArray;
+    }
+
     // 根据九宫格当中的坐标，返回该坐标所应该填写的数字
     private int getTile(int x, int y) {
         return sudoku[y * 9 + x];
     }
+
+    private NumNode getNumNode(int x, int y) {
+        NumNode[][] numNodes = numAloneArray.getArray();
+        return numNodes[x][y];
+}
 
     public String getTileString(int x, int y) {
         int v = getTile(x, y);

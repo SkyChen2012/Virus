@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,15 +24,16 @@ import android.widget.EditText;
 
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.benson.BensonNetWork.XXOkHttpUtil;
-import com.benson.Map.LocationActivity;
-import com.benson.Map.MapService;
+import com.benson.Tools.BensonNetWork.XXOkHttpUtil;
+import com.benson.Tools.Map.LocationActivity;
+import com.benson.Tools.Map.MapService;
 import com.benson.Tools.Login.LoginSignInActivity;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.NumberGame.NumberActivity.SudokuActivity;
-import com.benson.virus.Bluetooth.BluetoothMainActivity;
-import com.benson.virus.JPush.JPushUtil;
+import com.benson.game.NumberGame.NumberTools.Constant;
+import com.benson.Tools.Bluetooth.BluetoothMainActivity;
+import com.benson.Tools.JPush.JPushUtil;
 
 
 public class MainActivity extends AppCompatActivity
@@ -115,7 +117,10 @@ public class MainActivity extends AppCompatActivity
         setBaiduLBS();
 
 
-
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Constant.density = dm.density;
+        Constant.densityDpi = dm.densityDpi;
         //调试 end
 
     }

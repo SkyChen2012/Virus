@@ -62,7 +62,8 @@
         <service android:name="com.benson.game.AgileBuddy.ScoreUpgrateService" />
         <!--AgileBuddy end-->
         <!-- 数独 -->
-        <activity android:name="com.benson.game.NumberGame.NumberActivity.SudokuActivity" />
+        <activity android:name="com.benson.game.NumberGame.NumberActivity.SudokuActivity"
+                  android:screenOrientation="portrait"/>
 
         <!--数独 end-->
         <!--game end-->
@@ -84,17 +85,17 @@
 
         <!--蓝牙-->
         <activity
-            android:name="com.benson.virus.Bluetooth.BluetoothMainActivity"
+            android:name="com.benson.virus.com.benson.Tools.Bluetooth.BluetoothMainActivity"
             android:label="@string/app_name"/>
-        <activity android:name="com.benson.virus.Bluetooth.operation.OperationActivity"
+        <activity android:name="com.benson.virus.com.benson.Tools.Bluetooth.operation.OperationActivity"
                   android:theme="@style/AppTheme.NoActionBar"
             />
 
         <!--蓝牙end-->
 
         <!--地图-->
-        <service android:name="com.benson.Map.MapService"/>
-        <activity android:name="com.benson.Map.LocationActivity"/>
+        <service android:name="com.benson.Tools.Map.MapService"/>
+        <activity android:name="com.benson.Tools.Map.LocationActivity"/>
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -114,7 +115,7 @@
 
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
-            android:name=".JPush.JPushReceiver"
+            android:name="com.benson.Tools.JPush.JPushReceiver"
             android:exported="false"
             android:enabled="true">
             <intent-filter>

@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -17,7 +19,9 @@ import com.benson.game.NumberGame.Entity.ArrayMap;
 import com.benson.game.NumberGame.Entity.DrawSudokuAloneArray;
 import com.benson.game.NumberGame.Entity.SudokuArray;
 import com.benson.game.NumberGame.NumberTools.ClickFlag;
+import com.benson.game.NumberGame.NumberTools.Constant;
 import com.benson.game.NumberGame.NumberTools.GameState;
+import com.benson.virus.R;
 
 
 /**
@@ -35,6 +39,7 @@ import com.benson.game.NumberGame.NumberTools.GameState;
 
 public class SudokuSurfaceView extends SurfaceView implements
         SurfaceHolder.Callback{
+    private final static String Tag = "";
 
     private SurfaceHolder holder;
     /* 加载数据结束后通知界面的handler */
@@ -55,8 +60,33 @@ public class SudokuSurfaceView extends SurfaceView implements
     private int isVictory = GameState.Nothing;
 
 
+    public SudokuSurfaceView(Context context) {
+        this(context,null);
+
+    }
+
+    public SudokuSurfaceView(Context context, AttributeSet attrs) {
+        this(context,attrs,0);
+    }
+
+    public SudokuSurfaceView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        initView();
+    }
+
     public SudokuSurfaceView(Context context, Handler handler, SudokuArray numAloneArray) {
-        super(context);
+        this(context);
+
+        this.handler = handler;
+        this.numAloneArray = numAloneArray;
+
+    }
+
+    private void initView(){
+
+        numAloneArray = new SudokuArray(9, 1);
+        numAloneArray.begin();
+
         this.setFocusableInTouchMode(true);
         holder = this.getHolder();
         holder.addCallback(this);
@@ -68,14 +98,23 @@ public class SudokuSurfaceView extends SurfaceView implements
         this.numAloneArray = numAloneArray;
         drawNumAloneArray = new DrawSudokuAloneArray(numAloneArray);
 
+
+
     }
+
+
 
     @Override
     public void onDraw(Canvas canvas) {
+
+        map.init();
+        drawNumAloneArray.init();
+
         canvas.drawARGB(255, 187, 173, 160);
         map.drawNumAloneMap(isVictory, canvas, paint);
         map.drawLineMap(canvas, paint);
         drawNumAloneArray.onDrawMap(canvas, paint);
+
     }
 
     /**
@@ -96,9 +135,9 @@ public class SudokuSurfaceView extends SurfaceView implements
                 upTime = Calendar.getInstance().getTimeInMillis();
                 if (map.isClickRest(upX, upY)) {
 				/* 点击了重来按钮 */
-                    Message msg = new Message();
-                    msg.arg1 = 2;
-                    handler.sendMessage(msg);
+//                    Message msg = new Message();
+//                    msg.arg1 = 2;
+//                    handler.sendMessage(msg);
                 } else {
                     if (isVictory == GameState.Nothing) {
 
@@ -173,15 +212,27 @@ public class SudokuSurfaceView extends SurfaceView implements
     public void surfaceDestroyed(SurfaceHolder holder) {
         // TODO Auto-generated method stub
         changeFace.flag = false;
-        // changeFace.stop_();
-        // String temp = "";
-        // for (int i = 0; i < numAloneArray.getArray().length; i++) {
-        // temp += "\r\n";
-        // for (int j = 0; j < numAloneArray.getArray()[i].length; j++) {
-        // temp += numAloneArray.getArray()[i][j].systemNum + " ";
-        // }
-        //
-        // }
-        // MyFile.writeLog("sudoku", temp);
+//         changeFace.stop_();
+//         String temp = "";
+//         for (int i = 0; i < numAloneArray.getArray().length; i++) {
+//             temp += "\r\n";
+//             for (int j = 0; j < numAloneArray.getArray()[i].length; j++) {
+//                 temp += numAloneArray.getArray()[i][j].systemNum + " ";
+//             }
+//
+//         }
+//         MyFile.writeLog("sudoku", temp);
+    }
+
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+
+        Constant.height = h;
+        Constant.width = w;
+        Log.i(Tag,"[Constant.height:" + Constant.height +"][Constant.width:"+ Constant.width + "][Constant.densityDpi:" +Constant.densityDpi +"][Constant.density:"+Constant.density +"]");
+
+        super.onSizeChanged(w, h, oldw, oldh);
+
     }
 }

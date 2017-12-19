@@ -1,22 +1,16 @@
 package com.benson.Tools;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.benson.BensonNetWork.XXNetWorkUtil;
+import com.benson.Tools.BensonNetWork.XXNetWorkUtil;
 import com.benson.Tools.XXUtils.XXTimeUtils;
-import com.zhy.http.okhttp.OkHttpUtils;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * com.benson.Tools

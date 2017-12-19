@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.benson.BensonDB.SQLite.XXSQLiteDBManage;
+import com.benson.Tools.BensonDB.SQLite.XXSQLiteDBManage;
 
 import java.util.HashMap;
 import java.util.Map;

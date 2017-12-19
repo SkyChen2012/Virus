@@ -22,6 +22,7 @@ public class SudokuArray extends ArrayGame {
     public int x;
     public NumNode array[][];
     public int level;
+
     /* 用来记录位置莫位置上测试过的数字，并且如果确定后就将数字放入其中进行记录 */
     public ArrayList<recordPosition> arrayPosition = new ArrayList<recordPosition>();
 
@@ -48,7 +49,7 @@ public class SudokuArray extends ArrayGame {
                         continue;
                     }
                     else if(array[i][j].flag && !isContradict2(i, j, array[i][j].userNum)){
-                        return GameState.Nothing;
+                        return GameState.Lose;
                     }
                 }
             }
@@ -391,8 +392,10 @@ public class SudokuArray extends ArrayGame {
 
 
     /**
-     * 数独求解器 根据已知部分数独格子的数独题进行求解 1.先随机抽取一些数字放入格子中如果满足要求继续下步骤
-     * 2.如果1-9都不满足那么回溯到上一步再重新取值（并且不会取同一个值）回溯有多种情况 3.如此往复知道穷举出合适的值便可以
+     * 数独求解器 根据已知部分数独格子的数独题进行求解
+     * 1.先随机抽取一些数字放入格子中如果满足要求继续下步骤
+     * 2.如果1-9都不满足那么回溯到上一步再重新取值（并且不会取同一个值）回溯有多种情况
+     * 3.如此往复知道穷举出合适的值便可以
      *
      * */
     private void answerShuDu() {
@@ -592,4 +595,11 @@ public class SudokuArray extends ArrayGame {
         return (int) (Math.random() * 100 % 9);
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }

@@ -6,6 +6,7 @@
     <color name="colorRoseRed">#f24e4e</color>
 <!--Sudoku-->
     <color name="Sudoku_background">#ffe6f0ff</color>
+    <color name="Sudoku_background2">#ffbbADA0</color>
     <color name="Sudoku_hilite">#ffffffff</color>
     <color name="Sudoku_light">#ffff0000</color>
     <color name="Sudoku_dark">#ff000000</color>

@@ -57,10 +57,18 @@ public class ArrayMap {
     float restRectWidth, left, right, top, bottom;
 
     public ArrayMap(int x) {
+
+        this.x = x;
         rectf = new RectF();
         startTime = Calendar.getInstance().getTimeInMillis();
-        this.x = x;
-        numSpace = (12 / x) * Constant.density;
+
+        init();
+    }
+
+    public void init(){
+
+
+        numSpace = (12 / x) * Constant.density;// why ?
         roundX = (35 / x) * Constant.density;
         if (roundX > 25)
             roundX = 25;
@@ -68,16 +76,18 @@ public class ArrayMap {
         mapLeft = numSpace;
         mapRight = Constant.width - numSpace;
         rectWidth = (mapRight - mapLeft) / x;
+
         mapTop = ((Constant.height - Constant.width) - rectWidth - 2 * numSpace);
         mapBottom = Constant.height;
 
-		/* 重来按钮的位置初始化 */
-        restRectWidth = (40 * Constant.density + 20);
-        left = Constant.width - restRectWidth - 3 * numSpace;
-        top = numSpace * 3;
-        right = Constant.width - 2 * numSpace;
-        bottom = (float) (restRectWidth * 2 / 3.0) + numSpace;
+//		/* 重来按钮的位置初始化 */
+//        restRectWidth = (40 * Constant.density + 20);
+//        left = Constant.width - restRectWidth - 3 * numSpace;
+//        top = numSpace * 3;
+//        right = Constant.width - 2 * numSpace;
+//        bottom = (float) (restRectWidth * 2 / 3.0) + numSpace;
     }
+
 
     /* 初始化地图属性 和重来按钮的属性 */
     public ArrayMap(int x, int y) {
@@ -195,17 +205,14 @@ public class ArrayMap {
         FontMetrics fm = paint.getFontMetrics();
         float textHeight = (float) (Math.ceil(fm.descent - fm.ascent) - Constant.density * 8);
         if (success == GameState.Success) {
-            canvas.drawText("恭喜！用时：" + getTime(GameState.Success) + "秒",
-                    numSpace * 5, mapTop - textHeight - textHeight / 2, paint);
+            canvas.drawText("恭喜！用时：" + getTime(GameState.Success) + "秒", numSpace * 5, mapTop - textHeight - textHeight / 2, paint);
         } else if(success == GameState.Nothing){
-            canvas.drawText("时间：" + getTime(GameState.Nothing) + "秒",
-                    numSpace * 5, mapTop - textHeight, paint);
+//            canvas.drawText("时间：" + getTime(GameState.Nothing) + "秒", numSpace * 5, mapTop - textHeight, paint);
         }
         else{
-            canvas.drawText("上次时间：" + getTime(GameState.DbSuccess) + "秒",
-                    numSpace * 5, mapTop - textHeight, paint);
+            canvas.drawText("上次时间：" + getTime(GameState.DbSuccess) + "秒", numSpace * 5, mapTop - textHeight, paint);
         }
-        drawReset(canvas, paint);
+//        drawReset(canvas, paint);
     }
 
     /* 为数独绘制重来按钮 和时间 */
@@ -215,18 +222,16 @@ public class ArrayMap {
         FontMetrics fm = paint.getFontMetrics();
         float textHeight = (float) (Math.ceil(fm.descent - fm.ascent) - Constant.density * 8);
         if (success == GameState.Success) {
-            canvas.drawText("恭喜！用时：" + getTime(GameState.Success) + "秒",
-                    numSpace * 3, mapTop / 2, paint);
+            canvas.drawText("恭喜！用时：" + getTime(GameState.Success) + "秒", numSpace * 3, mapTop / 2, paint);
         }
         else if(success == GameState.DbSuccess){
-            canvas.drawText("上次时间：" + getTime(GameState.DbSuccess) + "秒", numSpace,
-                    textHeight, paint);
+            canvas.drawText("上次时间：" + getTime(GameState.DbSuccess) + "秒", numSpace,textHeight, paint);
         }
         else {
-            canvas.drawText("时间：" + getTime(GameState.Nothing) + "秒", numSpace,
-                    textHeight, paint);
+//            canvas.drawText("时间：" + getTime(GameState.Nothing) + "秒", numSpace, textHeight, paint);
         }
-        drawReset(canvas, paint);
+//        重来
+//        drawReset(canvas, paint);
     }
 
     /* 绘画重来的按钮 */
@@ -259,61 +264,35 @@ public class ArrayMap {
         paint.setStrokeWidth(numSpace);
 		/* 竖细线 */
         paint.setColor(Color.argb(255, 138, 138, 138));
-        canvas.drawLine(mapLeft + rectWidth, mapTop - rectWidth, mapLeft
-                + rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
-        canvas.drawLine(mapLeft + 2 * rectWidth, mapTop - rectWidth, mapLeft
-                        + 2 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace,
-                paint);
-        canvas.drawLine(mapLeft + 4 * rectWidth, mapTop - rectWidth, mapLeft
-                        + 4 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace,
-                paint);
-        canvas.drawLine(mapLeft + 5 * rectWidth, mapTop - rectWidth, mapLeft
-                        + 5 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace,
-                paint);
-        canvas.drawLine(mapLeft + 7 * rectWidth, mapTop - rectWidth, mapLeft
-                        + 7 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace,
-                paint);
-        canvas.drawLine(mapLeft + 8 * rectWidth, mapTop - rectWidth, mapLeft
-                        + 8 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace,
-                paint);
+
+        canvas.drawLine(mapLeft + 1 * rectWidth, mapTop - rectWidth, mapLeft + 1 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+        canvas.drawLine(mapLeft + 2 * rectWidth, mapTop - rectWidth, mapLeft + 2 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+        canvas.drawLine(mapLeft + 4 * rectWidth, mapTop - rectWidth, mapLeft + 4 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+        canvas.drawLine(mapLeft + 5 * rectWidth, mapTop - rectWidth, mapLeft + 5 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+        canvas.drawLine(mapLeft + 7 * rectWidth, mapTop - rectWidth, mapLeft + 7 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+        canvas.drawLine(mapLeft + 8 * rectWidth, mapTop - rectWidth, mapLeft + 8 * rectWidth, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+
 		/* 横细线 */
-        canvas.drawLine(mapLeft, mapTop, mapRight, mapTop, paint);
-        canvas.drawLine(mapLeft, mapTop + rectWidth, mapRight, mapTop
-                + rectWidth, paint);
-        canvas.drawLine(mapLeft, mapTop + 3 * rectWidth, mapRight, mapTop + 3
-                * rectWidth, paint);
-        canvas.drawLine(mapLeft, mapTop + 4 * rectWidth, mapRight, mapTop + 4
-                * rectWidth, paint);
-        canvas.drawLine(mapLeft, mapTop + 6 * rectWidth, mapRight, mapTop + 6
-                * rectWidth, paint);
-        canvas.drawLine(mapLeft, mapTop + 7 * rectWidth, mapRight, mapTop + 7
-                * rectWidth, paint);
+        canvas.drawLine(mapLeft, mapTop + 0 * rectWidth, mapRight, mapTop + 0 * rectWidth, paint);
+        canvas.drawLine(mapLeft, mapTop + 1 * rectWidth, mapRight, mapTop + 1 * rectWidth, paint);
+        canvas.drawLine(mapLeft, mapTop + 3 * rectWidth, mapRight, mapTop + 3 * rectWidth, paint);
+        canvas.drawLine(mapLeft, mapTop + 4 * rectWidth, mapRight, mapTop + 4 * rectWidth, paint);
+        canvas.drawLine(mapLeft, mapTop + 6 * rectWidth, mapRight, mapTop + 6 * rectWidth, paint);
+        canvas.drawLine(mapLeft, mapTop + 7 * rectWidth, mapRight, mapTop + 7 * rectWidth, paint);
 
 		/* 竖粗线 */
         paint.setColor(Color.argb(255, 36, 72, 214));
-        canvas.drawLine(mapLeft, mapTop - rectWidth, mapLeft, mapBottom - 2
-                * rectWidth - 2 * numSpace, paint);
 
-        canvas.drawLine(mapLeft + rectWidth * 3, mapTop - rectWidth, mapLeft
-                        + rectWidth * 3, mapBottom - 2 * rectWidth - 2 * numSpace,
-                paint);
+        canvas.drawLine(mapLeft + rectWidth * 0, mapTop - rectWidth, mapLeft + rectWidth * 0, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+        canvas.drawLine(mapLeft + rectWidth * 3, mapTop - rectWidth, mapLeft + rectWidth * 3, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+        canvas.drawLine(mapLeft + rectWidth * 6, mapTop - rectWidth, mapLeft + rectWidth * 6, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
+        canvas.drawLine(mapLeft + rectWidth * 9, mapTop - rectWidth, mapLeft + rectWidth * 9, mapBottom - 2 * rectWidth - 2 * numSpace, paint);
 
-        canvas.drawLine(mapLeft + rectWidth * 6, mapTop - rectWidth, mapLeft
-                        + rectWidth * 6, mapBottom - 2 * rectWidth - 2 * numSpace,
-                paint);
-
-        canvas.drawLine(mapLeft + rectWidth * 9, mapTop - rectWidth, mapLeft
-                        + rectWidth * 9, mapBottom - 2 * rectWidth - 2 * numSpace,
-                paint);
-		/* 横粗线 */
-        canvas.drawLine(mapLeft, mapTop - rectWidth, mapRight, mapTop
-                - rectWidth, paint);
-        canvas.drawLine(mapLeft, mapTop + rectWidth * 2, mapRight, mapTop
-                + rectWidth * 2, paint);
-        canvas.drawLine(mapLeft, mapTop + rectWidth * 5, mapRight, mapTop
-                + rectWidth * 5, paint);
-        canvas.drawLine(mapLeft, mapTop + rectWidth * 8, mapRight, mapTop
-                + rectWidth * 8, paint);
+        /* 横粗线 */
+        canvas.drawLine(mapLeft, mapTop + rectWidth *-1, mapRight, mapTop + rectWidth *-1, paint);
+        canvas.drawLine(mapLeft, mapTop + rectWidth * 2, mapRight, mapTop + rectWidth * 2, paint);
+        canvas.drawLine(mapLeft, mapTop + rectWidth * 5, mapRight, mapTop + rectWidth * 5, paint);
+        canvas.drawLine(mapLeft, mapTop + rectWidth * 8, mapRight, mapTop + rectWidth * 8, paint);
 
     }
 

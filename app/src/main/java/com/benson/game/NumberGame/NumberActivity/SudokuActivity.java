@@ -11,7 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.benson.BensonDB.SharedPreferences.XXSharedPreferences;
+import com.benson.Tools.BensonDB.SharedPreferences.XXSharedPreferences;
+import com.benson.game.NumberGame.Views.SudokuSurfaceView;
 import com.benson.game.NumberGame.Views.SudokuView;
 import com.benson.virus.R;
 
@@ -30,6 +31,7 @@ public class SudokuActivity extends Activity  implements  View.OnClickListener {
     private Button No3;
 
     private SudokuView mSudokuView;
+    private SudokuSurfaceView mSudokuSurfaceView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +44,14 @@ public class SudokuActivity extends Activity  implements  View.OnClickListener {
 
     @SuppressLint("CutPasteId")
     private  void  initView(){
-        mSudokuView = (SudokuView)findViewById(R.id.Sudoku_View);
+//        mSudokuView = (SudokuView)findViewById(R.id.Sudoku_View);
+
+        /*设置当前Activity的背景色*/
+
+        this.getWindow().setBackgroundDrawableResource(R.color.Sudoku_background2);
+        /*背景色设置结束*/
+
+        mSudokuSurfaceView = (SudokuSurfaceView)findViewById(R.id.Sudoku_View);
 
 //       测试
         XXSharedPreferences xxSharedPreferences = XXSharedPreferences.getInstance();

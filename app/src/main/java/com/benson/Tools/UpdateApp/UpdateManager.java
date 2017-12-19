@@ -26,7 +26,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.benson.BensonNetWork.XXOkHttpUtil;
+import com.benson.Tools.BensonNetWork.XXOkHttpUtil;
 import com.benson.virus.R;
 import com.google.gson.Gson;
 
