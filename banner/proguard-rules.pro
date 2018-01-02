@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 # By default, the flags in this file are appended to flags specified
-# in /Users/Benson/Library/Android/sdk/tools/proguard/proguard-android.txt
+# in D:\android\android-sdk-windows/tools/proguard/proguard-android.txt
 # You can edit the include path and order by changing the proguardFiles
 # directive in build.gradle.
 #
@@ -15,21 +15,3 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
-
-# SMSSDK
--dontwarn com.mob.**
--keep class com.mob.**{*;}
-
--dontwarn cn.smssdk.**
--keep class cn.smssdk.**{*;}
-
-# glide 的混淆代码
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-  **[] $VALUES;
-  public *;
-}
-# banner 的混淆代码
--keep class com.youth.banner.** {
-    *;
- }

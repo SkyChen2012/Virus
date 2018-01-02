@@ -33,6 +33,7 @@ public class AdapterFragment extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {//选择性实现
+
         return mFragments.get(position).getClass().getSimpleName();
     }
 }

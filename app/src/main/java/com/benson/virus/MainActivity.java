@@ -7,9 +7,14 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.DisplayMetrics;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.PagerTitleStrip;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,24 +25,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.benson.Tools.BensonNetWork.XXOkHttpUtil;
-import com.benson.Tools.Map.LocationActivity;
-import com.benson.Tools.Map.MapService;
+import com.benson.Activity.XXFragment.ContentMainFragment;
+import com.benson.Activity.XXFragment.WeatherFragment;
+import com.benson.Activity.XXFragment.BannerFragment;
+import com.benson.Activity.XXFragment.wipeRefreshFragment;
 import com.benson.Tools.Login.LoginSignInActivity;
 import com.benson.Tools.UpdateApp.UpdateManager;
 import com.benson.game.AgileBuddy.Splash;
 import com.benson.game.NumberGame.NumberActivity.SudokuActivity;
-import com.benson.game.NumberGame.NumberTools.Constant;
-import com.benson.Tools.Bluetooth.BluetoothMainActivity;
 import com.benson.Tools.JPush.JPushUtil;
+import com.benson.views.ViewPager.AdapterFragment;
+import com.benson.views.ViewPager.AdapterViewpager;
+import com.benson.views.ViewPager.DepthPageTransformer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener{
+        implements NavigationView.OnNavigationItemSelectedListener,OnClickListener{
 
 
     private static final String TAG = "Virus_MainActivity";
@@ -48,21 +55,17 @@ public class MainActivity extends AppCompatActivity
     //极光调试 end
 
     // OK http调试
-
-    private Button mButtonSend;
-    private Button playButtonSend;
-    private Button tijiaomButtonSend;
-    private EditText yanzhengma;
-    private EditText shoujihaoma;
-    private Button startBtn;
-    private Button stopBtn;
-    private EditText tvCity;
-
-
     private int level = 1;
-    private XXOkHttpUtil mOkHttpUtil;
-    private LocationClientOption  mOption;;
-    private LocationClient mLocationClient;//定位的核心类
+
+
+    private View view1, view2, view3;//需要滑动的页卡
+    private ViewPager viewPager;//viewpager
+    private PagerTitleStrip pagerTitleStrip;//viewpager的标题
+    private PagerTabStrip pagerTabStrip;//一个viewpager的指示器，效果就是一个横的粗的下划线
+    private List<View> viewList;//把需要滑动的页卡添加到这个list中
+    private List<String> titleList;//viewpager的标题
+    private Button weibo_button;//button对象，一会用来进入第二个Viewpager的示例
+
 
     // OK http调试 end
 
@@ -100,27 +103,7 @@ public class MainActivity extends AppCompatActivity
         checkUpdateApp(this);
         self = this;
         //调试
-
-
-        mButtonSend = (Button)findViewById(R.id.BtnSend);
-        playButtonSend = (Button)findViewById(R.id.play);
-        tijiaomButtonSend = (Button)findViewById(R.id.tijiao);
-        yanzhengma = (EditText)findViewById(R.id.yanzhengma);
-        shoujihaoma = (EditText)findViewById(R.id.shoujihaoma);
-
-
-        mButtonSend.setOnClickListener(this);
-        playButtonSend.setOnClickListener(this);
-        tijiaomButtonSend.setOnClickListener(this);
-
-
-        setBaiduLBS();
-
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        Constant.density = dm.density;
-        Constant.densityDpi = dm.densityDpi;
+        initView();
         //调试 end
 
     }
@@ -128,27 +111,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.BtnSend:{
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, MapService.class);
-                startService(intent);
-
-            }
-                break;
-            case R.id.play:{
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, MapService.class);
-                stopService(intent);
-
-            }
-                break;
-            case R.id.tijiao:{
-                Log.i(TAG, "bluetoothActivity...... ");
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, BluetoothMainActivity.class);
-                startActivity(intent);
-            }
-                break;
             default:
                 break;
         }
@@ -312,28 +274,51 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    private void setBaiduLBS() {
+    private void initViewPagers() {
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        //pagerTitleStrip = (PagerTitleStrip) findViewById(R.id.pagertitle);
+//        pagerTabStrip=(PagerTabStrip) findViewById(R.id.pagertab);
+//        pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.white));
+//        pagerTabStrip.setDrawFullUnderline(false);
+//        pagerTabStrip.setBackgroundColor(getResources().getColor(R.color.yellow));
+//        pagerTabStrip.setTextSpacing(50);
 
-        startBtn = (Button)findViewById(R.id.startBtn);
-        stopBtn = (Button)findViewById(R.id.stopBtn);
-        tvCity = (EditText) findViewById(R.id.tvCity);
+        LayoutInflater lf = getLayoutInflater().from(this);
+        view1 = lf.inflate(R.layout.layout1, null);
+        view2 = lf.inflate(R.layout.layout2, null);
+        view3 = lf.inflate(R.layout.layout3, null);
 
-        startBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG,"startBtn.setOnClickListener。。。。");
+        viewList = new ArrayList<View>();// 将要分页显示的View装入数组中
+        viewList.add(view1);
+        viewList.add(view2);
+        viewList.add(view3);
 
-                Intent intent = new Intent(MainActivity.this,LocationActivity.class);
-                startActivity(intent);
+        titleList = new ArrayList<String>();// 每个页面的Title数据
+        titleList.add("wp");
+        titleList.add("jy");
+        titleList.add("jh");
 
-            }
-        });
-        stopBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG,"stopBtn.setOnClickListener。。。。");
-
-            }
-        });
+        AdapterViewpager pagerAdapter = new AdapterViewpager(viewList,titleList);
+        viewPager.setAdapter(pagerAdapter);
     }
+
+
+    private void initView(){
+        //构造适配器
+        List<Fragment> fragments=new ArrayList<Fragment>();
+
+        fragments.add(new ContentMainFragment());
+        fragments.add(new WeatherFragment());
+        fragments.add(new BannerFragment());
+        fragments.add(new wipeRefreshFragment());
+
+        AdapterFragment adapter = new AdapterFragment(getSupportFragmentManager(), fragments);
+
+        //设定适配器
+        ViewPager vp = (ViewPager)findViewById(R.id.viewpager);
+        vp.setAdapter(adapter);
+        vp.setPageTransformer(true, new DepthPageTransformer());
+    }
+
+
 }
